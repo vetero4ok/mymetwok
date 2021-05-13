@@ -1,0 +1,12 @@
+.sidebar {
+    grid-area: n;
+    background: rgb(201, 255, 238);
+    padding: 20px;
+}
+.item a {
+   color: dimgrey;
+    text-decoration: none;
+}
+.item a.activeLink {
+    color: dodgerblue;
+}

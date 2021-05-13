@@ -1,0 +1,16 @@
+
+.header {
+    grid-area: h;
+    position: relative;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background:grey;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.header img {
+    width: 80px;
+    height: 40px;
+}
