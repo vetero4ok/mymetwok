@@ -9,6 +9,7 @@ import {News} from './Componens/News/News';
 import {Music} from './Componens/Music/Music';
 import {Settings} from './Componens/Settings/Settings';
 import {DialogsDataType, MassagesDataType, MyPostsDataType} from './Redux/State';
+import {Friends} from './Componens/Friends/Friends';
 
 
 type propsAppType = {
@@ -30,6 +31,8 @@ function App(props: propsAppType) {
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>
+                    <Route path="/friends" render={() => <Friends/>}/>
+
                 </div>
 
             </div>
