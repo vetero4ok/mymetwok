@@ -5,24 +5,32 @@ export type MyPostsDataType = {
     massage: string
     likesCounts: number
 }
+type ProfilePage = {
+    myPostsData: Array<MyPostsDataType>,
+}
+
 export type DialogsDataType = {
     id: string
     name: string
 }
-
 export type MassagesDataType = {
     id: string
     massage: string
-}
-
-type ProfilePage = {
-    myPostsData: Array<MyPostsDataType>,
 }
 type DialogPage = {
     dialogsData: Array<DialogsDataType>,
     massagesData: Array<MassagesDataType>
 }
-type SidebarType = {}
+
+export type FriendType = {
+    id:string
+    name:string
+    avatar:string
+}
+
+type SidebarType = {
+    friendsData:Array<FriendType>,
+}
 type RootStateType = {
     profilePage: ProfilePage,
     dialogPage: DialogPage,
@@ -55,6 +63,13 @@ let state: RootStateType = {
 
         ]
     },
-    sidebar: {},
+    sidebar: {
+        friendsData:[
+            {id: v1(), avatar: 'https://buddy.ghostpool.com/wp-content/uploads/avatars/4/d0344a04087644befce78124c6277bb1-bpthumb.jpg', name: 'Igor'},
+            {id: v1(), avatar: 'https://buddy.ghostpool.com/wp-content/uploads/avatars/2/d1b23ad972e736b7c0510b288875c3b6-bpthumb.jpg', name: 'Maryna'},
+            {id: v1(), avatar: 'https://buddy.ghostpool.com/wp-content/uploads/avatars/4/d0344a04087644befce78124c6277bb1-bpthumb.jpg', name: 'Ragnar'},
+            {id: v1(), avatar: 'https://buddy.ghostpool.com/wp-content/uploads/group-avatars/34/1c7da6471476e42b543812f35ef23d2f-bpthumb.jpg', name: 'Ruslan'},
+        ]
+    },
 }
 export default state

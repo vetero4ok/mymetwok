@@ -9,11 +9,14 @@ import state from './Redux/State';
 let dialogsData = state.dialogPage.dialogsData
 let massagesData = state.dialogPage.massagesData
 let myPostsData = state.profilePage.myPostsData
+let friendsData = state.sidebar.friendsData
 ReactDOM.render(
     <React.StrictMode>
         <App dialogsData={dialogsData}
              massagesData={massagesData}
              myPostsData={myPostsData}
+             friendsData={friendsData}
+
         />
     </React.StrictMode>,
     document.getElementById('root')

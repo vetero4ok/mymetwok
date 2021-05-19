@@ -1,9 +1,14 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import s from './Navbar.module.css';
+import {FriendType} from '../../Redux/State';
 import {Friends} from '../Friends/Friends';
 
-export const Navbar = () => {
+type propsNavbarType = {
+    friendsData:Array<FriendType>
+}
+
+export const Navbar = (props:propsNavbarType) => {
     return (
         <nav className={s.sidebar}> {/*Sidebar*/}
             <div className={s.item}>
@@ -25,7 +30,7 @@ export const Navbar = () => {
                 <NavLink to="/friends" activeClassName={s.activeLink}>Friends</NavLink>
             </div>
             <div >
-                <Friends />
+               <NavLink to="/friends"><Friends friendsData={props.friendsData}/></NavLink>
             </div>
         </nav>
 
