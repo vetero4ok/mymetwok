@@ -6,6 +6,7 @@ import {MyPostsDataType} from '../../../../Redux/State';
 
 type propsMyPostType = {
     myPostsData: Array<MyPostsDataType>
+    addPost: (postMessage: string) => void
 }
 
 
@@ -19,8 +20,10 @@ export const MyPosts = (props: propsMyPostType) => {
 
     let newPostElementsRef = React.createRef<HTMLTextAreaElement>();
     let addPost = () => {
-        let text = newPostElementsRef.current?.value
-        alert(text)
+
+        if(newPostElementsRef.current){ //выполнение проверки если есть сылка то ок. TS ругается
+            props.addPost(newPostElementsRef.current.value)
+        }
     }
 
     return (

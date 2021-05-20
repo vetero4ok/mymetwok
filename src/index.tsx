@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import state from './Redux/State';
+import state, {addPost} from './Redux/State';
+
 
 
 let dialogsData = state.dialogPage.dialogsData
@@ -12,10 +13,12 @@ let myPostsData = state.profilePage.myPostsData
 let friendsData = state.sidebar.friendsData
 ReactDOM.render(
     <React.StrictMode>
-        <App dialogsData={dialogsData}
+        <App
+            dialogsData={dialogsData}
              massagesData={massagesData}
              myPostsData={myPostsData}
              friendsData={friendsData}
+             addPost={addPost}
 
         />
     </React.StrictMode>,

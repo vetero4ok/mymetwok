@@ -8,6 +8,7 @@ import {DialogsDataType, MassagesDataType} from '../../Redux/State';
 type propsDialogsType = {
     massagesData: Array<MassagesDataType>
     dialogsData: Array<DialogsDataType>
+    addPost: (postMessage: string) => void
 }
 
 export function Dialogs(props: propsDialogsType) {
@@ -24,9 +25,10 @@ export function Dialogs(props: propsDialogsType) {
 
     let newMessageRef = React.createRef<HTMLTextAreaElement>();
 
-    let addMessage = () => {
-        let text = newMessageRef.current?.value
-        alert(text)
+    let addPost = () => {
+        if(newMessageRef.current){ //выполнение проверки если есть сылка то ок. TS ругается
+            props.addPost(newMessageRef.current.value)
+        }
     }
 
     return (
@@ -41,7 +43,7 @@ export function Dialogs(props: propsDialogsType) {
             </div>
             <div>
                 <textarea ref={newMessageRef}/>
-                <button onClick={addMessage}>send</button>
+                <button onClick={addPost}>send</button>
             </div>
         </div>
     )

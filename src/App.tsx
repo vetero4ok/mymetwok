@@ -16,7 +16,8 @@ type propsAppType = {
     dialogsData: Array<DialogsDataType>
     massagesData: Array<MassagesDataType>
     myPostsData: Array<MyPostsDataType>
-    friendsData:Array<FriendType>
+    friendsData: Array<FriendType>
+    addPost: (postMessage: string) => void
 
 }
 
@@ -29,12 +30,16 @@ function App(props: propsAppType) {
                 <Navbar friendsData={props.friendsData}/>
                 <div className="app-wrapper-content">
                     <Route path="/dialogs" render={() => <Dialogs dialogsData={props.dialogsData}
-                                                                  massagesData={props.massagesData}/>}/>
-                    <Route path="/profile" render={() => <Profile myPostsData={props.myPostsData}/>}/>
+                                                                  massagesData={props.massagesData}
+                                                                  addPost={props.addPost}
+                    />}/>
+                    <Route path="/profile" render={() => <Profile myPostsData={props.myPostsData}
+                                                                  addPost={props.addPost}
+                    />}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>
-                    <Route path="/friends" render={() => <Friends  friendsData={props.friendsData} />}/>
+                    <Route path="/friends" render={() => <Friends friendsData={props.friendsData}/>}/>
 
                 </div>
 
