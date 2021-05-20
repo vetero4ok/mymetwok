@@ -8,7 +8,9 @@ import { MyPostsDataType } from '../../Redux/State';
 
 type propsProfileType = {
     myPostsData:Array<MyPostsDataType>
-    addPost: (postMessage: string) => void
+    addPostCallback: (postMessage: string) => void
+    updateNewPostText:(newText: string) =>void
+    newTextPost:string
 }
 
 export const Profile = (props: propsProfileType) => {
@@ -16,7 +18,9 @@ export const Profile = (props: propsProfileType) => {
         <div className={classes.content}> Main content
             <ProfileInfo />
             <MyPosts myPostsData= {props.myPostsData}
-                     addPost={props.addPost}
+                     newTextPost={props.newTextPost}
+                     addPostCallback={props.addPostCallback}
+                     updateNewPostText={props.updateNewPostText}
             />
         </div>
 

@@ -9,6 +9,7 @@ export type MyPostsDataType = {
     likesCounts: number
 }
 type ProfilePage = {
+    newTextPost: string
     myPostsData: Array<MyPostsDataType>,
 }
 
@@ -44,6 +45,7 @@ export type RootStateType = {
 
 export let state: RootStateType = {
     profilePage: {
+        newTextPost: '',
         myPostsData: [
             {id: v1(), massage: 'Hi, how are you?', likesCounts: 12},
             {id: v1(), massage: 'It is my first post!', likesCounts: 15},
@@ -93,13 +95,19 @@ export let state: RootStateType = {
 }
 export default state
 
-export const addPost = (postMessage: string) => {
-
+export const addPostCallback = (postMessage: string) => {
+debugger
     const newPost: MyPostsDataType = {
         id: v1(),
         massage: postMessage,
         likesCounts: 0
     }
     state.profilePage.myPostsData.push(newPost)
+    renderEntireTree(state);
+}
+export const updateNewPostText = (newText: string) => {
+    debugger
+
+    state.profilePage.newTextPost = newText
     renderEntireTree(state);
 }

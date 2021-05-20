@@ -14,8 +14,9 @@ import {RootStateType} from './Redux/State';
 
 type propsAppType = {
 
-    addPost: (postMessage: string) => void
     state:RootStateType
+    addPostCallback: (postMessage: string) => void
+    updateNewPostText:(newText: string) =>void
 }
 
 function App(props: propsAppType) {
@@ -28,10 +29,13 @@ function App(props: propsAppType) {
                 <div className="app-wrapper-content">
                     <Route path="/dialogs" render={() => <Dialogs dialogsData={props.state.dialogPage.dialogsData}
                                                                   massagesData={props.state.dialogPage.massagesData}
-                                                                  addPost={props.addPost}
+
+
                     />}/>
                     <Route path="/profile" render={() => <Profile myPostsData={props.state.profilePage.myPostsData}
-                                                                  addPost={props.addPost}
+                                                                  newTextPost={props.state.profilePage.newTextPost}
+                                                                  addPostCallback={props.addPostCallback}
+                                                                  updateNewPostText = {props.updateNewPostText}
                     />}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>

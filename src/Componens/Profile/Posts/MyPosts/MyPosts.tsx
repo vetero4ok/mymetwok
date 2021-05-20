@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css';
 import {Posts} from './Post/Posts';
 import {MyPostsDataType} from '../../../../Redux/State';
@@ -6,7 +6,9 @@ import {MyPostsDataType} from '../../../../Redux/State';
 
 type propsMyPostType = {
     myPostsData: Array<MyPostsDataType>
-    addPost: (postMessage: string) => void
+    newTextPost: string
+    addPostCallback: (postMessage: string) => void
+    updateNewPostText: (newText: string) => void
 }
 
 
@@ -18,13 +20,15 @@ export const MyPosts = (props: propsMyPostType) => {
             likesCounts={p.likesCounts}
         />)
 
-    let newPostElementsRef = React.createRef<HTMLTextAreaElement>();
-    let addPost = () => {
 
-        if(newPostElementsRef.current){ //выполнение проверки если есть сылка то ок. TS ругается
-            props.addPost(newPostElementsRef.current.value)
-        }
-        
+    let addPostCallback = () => {
+        debugger
+        props.addPostCallback(props.newTextPost)
+
+    }
+    const updateNewPostText = (e : ChangeEvent<HTMLTextAreaElement>) => {
+        props.updateNewPostText(e.currentTarget.value)
+
     }
 
     return (
@@ -35,10 +39,10 @@ export const MyPosts = (props: propsMyPostType) => {
             </div>
             <div>
                 <div>
-                    <textarea ref={newPostElementsRef} />
+                    <textarea value={props.newTextPost} onChange={updateNewPostText}/>
                 </div>
                 <div>
-                    <button onClick={addPost}>send</button>
+                    <button onClick={addPostCallback}>send</button>
                 </div>
             </div>
             <div>
