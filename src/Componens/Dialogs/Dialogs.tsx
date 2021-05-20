@@ -26,6 +26,7 @@ export function Dialogs(props: propsDialogsType) {
     let newMessageRef = React.createRef<HTMLTextAreaElement>();
 
     let addPost = () => {
+        debugger
         if(newMessageRef.current){ //выполнение проверки если есть сылка то ок. TS ругается
             props.addPost(newMessageRef.current.value)
         }

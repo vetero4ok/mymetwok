@@ -1,4 +1,7 @@
 import {v1} from 'uuid';
+import {renderEntireTree} from '../render';
+
+
 
 export type MyPostsDataType = {
     id: string
@@ -31,7 +34,7 @@ export type FriendType = {
 type SidebarType = {
     friendsData: Array<FriendType>,
 }
-type RootStateType = {
+export type RootStateType = {
     profilePage: ProfilePage,
     dialogPage: DialogPage,
     sidebar: SidebarType,
@@ -39,7 +42,7 @@ type RootStateType = {
 }
 
 
-let state: RootStateType = {
+export let state: RootStateType = {
     profilePage: {
         myPostsData: [
             {id: v1(), massage: 'Hi, how are you?', likesCounts: 12},
@@ -98,4 +101,5 @@ export const addPost = (postMessage: string) => {
         likesCounts: 0
     }
     state.profilePage.myPostsData.push(newPost)
+    renderEntireTree(state);
 }

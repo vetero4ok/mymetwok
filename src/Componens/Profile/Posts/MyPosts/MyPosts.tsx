@@ -24,6 +24,7 @@ export const MyPosts = (props: propsMyPostType) => {
         if(newPostElementsRef.current){ //выполнение проверки если есть сылка то ок. TS ругается
             props.addPost(newPostElementsRef.current.value)
         }
+        
     }
 
     return (
