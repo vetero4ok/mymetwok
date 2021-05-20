@@ -16,6 +16,7 @@ type ProfilePage = {
 export type DialogsDataType = {
     id: string
     name: string
+    avatar: string
 }
 export type MassagesDataType = {
     id: string
@@ -55,10 +56,22 @@ export let state: RootStateType = {
     },
     dialogPage: {
         dialogsData: [
-            {id: v1(), name: 'Igor'},
-            {id: v1(), name: 'Maryna'},
-            {id: v1(), name: 'Ragnar'},
-            {id: v1(), name: 'Ruslan'},
+            {   id: v1(),
+                name: 'Igor',
+                avatar: 'https://buddy.ghostpool.com/wp-content/uploads/avatars/4/d0344a04087644befce78124c6277bb1-bpthumb.jpg',
+            },
+            {   id: v1(),
+                name: 'Maryna',
+                avatar: 'https://buddy.ghostpool.com/wp-content/uploads/avatars/2/d1b23ad972e736b7c0510b288875c3b6-bpthumb.jpg',
+            },
+            {   id: v1(),
+                name: 'Ragnar',
+                avatar: 'https://buddy.ghostpool.com/wp-content/uploads/avatars/4/d0344a04087644befce78124c6277bb1-bpthumb.jpg',
+            },
+            {   id: v1(),
+                name: 'Ruslan',
+                avatar: 'https://buddy.ghostpool.com/wp-content/uploads/group-avatars/34/1c7da6471476e42b543812f35ef23d2f-bpthumb.jpg',
+            },
         ],
         massagesData: [
             {id: v1(), massage: 'Hi!'},

@@ -1,0 +1,21 @@
+.dialog {
+    display: flex;
+    padding: 5px;
+    align-items: center;
+
+}
+
+.dialog img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+.name{
+    padding: 10px;
+    font-size: 14px;
+
+}
+.dialog a {
+    color: dimgrey;
+    text-decoration: none;
+}

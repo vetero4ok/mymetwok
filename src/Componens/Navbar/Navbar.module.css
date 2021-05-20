@@ -2,6 +2,7 @@
     grid-area: n;
     background: rgb(201, 255, 238);
     padding: 20px;
+
 }
 .item a {
    color: dimgrey;
@@ -9,4 +10,9 @@
 }
 .item a.activeLink {
     color: dodgerblue;
+}
+.blockFriends {
+    width: 100px;
+    display: flex;
+
 }

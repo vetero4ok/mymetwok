@@ -10,8 +10,13 @@ type PropsFriendsType = {
 export const Friends = (props:PropsFriendsType) => {
     const friend = props.friendsData.map(f=>{
         return(
-      //  <img sourse={f.avatar} alt="avatar"/>
-        <div className={s.item_text}>{f.name}</div>
+        <div key={f.id}>
+            <div>
+            <img src={f.avatar} alt=''/>
+            </div>
+            <div className={s.item_text}>{f.name}</div>
+        </div>
+
         )
     })
 

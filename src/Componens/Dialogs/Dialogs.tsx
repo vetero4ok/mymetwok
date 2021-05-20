@@ -14,15 +14,21 @@ type propsDialogsType = {
 export function Dialogs(props: propsDialogsType) {
 
     const dialogElements = props.dialogsData.map(d =>
-        <Dialog
-            id={d.id}
-            name={d.name}
-        />)
+        <div key={d.id}>
+            <Dialog
+                id={d.id}
+                name={d.name}
+                avatar={d.avatar}
+            />
+        </div>
+    )
     const dialogMessage = props.massagesData.map(d =>
+    <div key={d.id}>
         <Message
             message={d.massage}
-        />)
-
+        />
+    </div>
+    )
 
 
     return (
@@ -36,8 +42,8 @@ export function Dialogs(props: propsDialogsType) {
                 {dialogMessage}
             </div>
             <div>
-                <textarea />
-                <button >send</button>
+                <textarea/>
+                <button>send</button>
             </div>
         </div>
     )

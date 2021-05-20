@@ -1,6 +1,7 @@
 .main {
     margin-bottom: 50px;
 }
+
 .friends {
 
     display: flex;
@@ -11,10 +12,11 @@
 .friends img {
     width: 40px;
     height: 40px;
-    border-radius: 5px ;
+    border-radius: 5px;
 
 }
 
 .item_text {
-font-size: 10px;
+    font-size: 10px;
+    text-align: center;
 }

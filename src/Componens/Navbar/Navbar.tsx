@@ -2,7 +2,8 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import s from './Navbar.module.css';
 import {FriendType} from '../../Redux/State';
-import {Friends} from '../Friends/Friends';
+import {BlockFriends} from './BlockFriends/BlockFriends';
+
 
 type propsNavbarType = {
     friendsData:Array<FriendType>
@@ -29,8 +30,8 @@ export const Navbar = (props:propsNavbarType) => {
             <div className={s.item}>
                 <NavLink to="/friends" activeClassName={s.activeLink}>Friends</NavLink>
             </div>
-            <div >
-               <NavLink to="/friends"><Friends friendsData={props.friendsData}/></NavLink>
+            <div className={s.blockFriends} >
+               <BlockFriends friendsData={props.friendsData}/>
             </div>
         </nav>
 
