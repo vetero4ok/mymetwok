@@ -22,7 +22,7 @@ export const MyPosts = (props: propsMyPostType) => {
 
 
     let addPostCallback = () => {
-        debugger
+
         props.addPostCallback(props.newTextPost)
 
     }

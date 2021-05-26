@@ -111,7 +111,6 @@ export let state: RootStateType = {
 export default state
 
 export const addPostCallback = (postMessage: string) => {
-debugger
     const newPost: MyPostsDataType = {
         id: v1(),
         massage: postMessage,
@@ -121,9 +120,7 @@ debugger
     renderEntireTree();
 }
 export const updateNewPostText = (newText: string) => {
-    debugger
-
-    state.profilePage.newTextPost = newText
+        state.profilePage.newTextPost = newText
     renderEntireTree();
 }
 export const Subscribe = (observer: ()=>void) => {
