@@ -1,11 +1,29 @@
 import React from 'react';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {renderEntireTree} from './render';
-import state from './Redux/State';
+import state, { Subscribe } from './Redux/State';
+import ReactDOM from 'react-dom';
+import App from './App';
+import  {addPostCallback,  updateNewPostText} from './Redux/State';
 
+export let renderEntireTree = () => {
 
-renderEntireTree(state);
+    ReactDOM.render(
+        <React.StrictMode>
+            <App
+                state={state}
+                addPostCallback={addPostCallback}
+                updateNewPostText = {updateNewPostText}
+
+            />
+        </React.StrictMode>,
+        document.getElementById('root')
+    );
+
+}
+
+renderEntireTree();
+Subscribe(renderEntireTree)
 
 
 

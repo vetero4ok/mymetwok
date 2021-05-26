@@ -1,5 +1,7 @@
 import {v1} from 'uuid';
-import {renderEntireTree} from '../render';
+let renderEntireTree = () => {
+    console.log('State changed')
+}
 
 
 
@@ -116,11 +118,14 @@ debugger
         likesCounts: 0
     }
     state.profilePage.myPostsData.push(newPost)
-    renderEntireTree(state);
+    renderEntireTree();
 }
 export const updateNewPostText = (newText: string) => {
     debugger
 
     state.profilePage.newTextPost = newText
-    renderEntireTree(state);
+    renderEntireTree();
+}
+export const Subscribe = (observer: ()=>void) => {
+    renderEntireTree =  observer;
 }
