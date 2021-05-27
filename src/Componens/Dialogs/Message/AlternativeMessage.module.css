@@ -1,0 +1,21 @@
+
+.message {
+    display: flex;
+    align-items: flex-end;
+    padding: 5px;
+    justify-content: flex-end;
+
+}
+.angle {
+
+    width: 15px;
+    height: 15px;
+    background: radial-gradient(circle at 15px 0, rgba(0, 0, 0, 0) 15px, rgba(67, 71, 71, 0.3) 0);
+}
+.textArea {
+
+    padding: 10px;
+    border-radius:  5px 5px 0 5px;
+    background-color: rgba(67, 71, 71, 0.3);
+
+}

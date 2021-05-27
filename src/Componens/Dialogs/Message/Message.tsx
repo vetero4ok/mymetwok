@@ -1,14 +1,15 @@
 import React from 'react';
-import s from './../Dialogs.module.css'
+import s from './Message.module.css'
 
 type propsMessage = {
-     message: string,
+    message: string,
 }
 
 export const Message = (props: propsMessage) => {
     return (
         <div className={s.message}>
-            {props.message}
+            <div className={s.angle}></div>
+            <div className={s.textArea}>{props.message}</div>
         </div>
     )
 }

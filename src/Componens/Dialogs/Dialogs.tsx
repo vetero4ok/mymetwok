@@ -1,8 +1,9 @@
 import React from 'react';
 import s from './Dialogs.module.css'
 import {Dialog} from './DialogsItems/DialogsItem';
-import {Message} from './Message/Massage';
+import {Message} from './Message/Message';
 import {DialogsDataType, MassagesDataType} from '../../Redux/State';
+import {AlternativeMessage} from './Message/AlternativeMessage';
 
 
 type propsDialogsType = {
@@ -25,6 +26,9 @@ export function Dialogs(props: propsDialogsType) {
     const dialogMessage = props.massagesData.map(d =>
     <div key={d.id}>
         <Message
+            message={d.massage}
+        />
+        <AlternativeMessage
             message={d.massage}
         />
     </div>
