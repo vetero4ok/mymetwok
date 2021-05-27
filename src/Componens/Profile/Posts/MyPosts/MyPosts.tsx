@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './MyPosts.module.css';
 import {Posts} from './Post/Posts';
 import {MyPostsDataType} from '../../../../Redux/State';
@@ -21,14 +21,21 @@ export const MyPosts = (props: propsMyPostType) => {
         />)
 
 
-    let addPostCallback = () => {
+    const addPostCallback = () => {
+        let validatedValue = props.newTextPost.trim()
+        if(validatedValue){
+            props.addPostCallback(validatedValue)
+        }
+        props.updateNewPostText('')
 
-        props.addPostCallback(props.newTextPost)
-
+    }
+    const onChangeKeyPress = (e:KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.key === 'Enter') {
+            addPostCallback()
+        }
     }
     const updateNewPostText = (e : ChangeEvent<HTMLTextAreaElement>) => {
         props.updateNewPostText(e.currentTarget.value)
-
     }
 
     return (
@@ -39,7 +46,11 @@ export const MyPosts = (props: propsMyPostType) => {
             </div>
             <div>
                 <div>
-                    <textarea value={props.newTextPost} onChange={updateNewPostText}/>
+                    <textarea
+                        value={props.newTextPost}
+                        onChange={updateNewPostText}
+                        onKeyPress={onChangeKeyPress}
+                    />
                 </div>
                 <div>
                     <button onClick={addPostCallback}>send</button>
