@@ -1,6 +1,7 @@
 import {v1} from 'uuid';
 
 
+
 export type MyPostsDataType = {
     id: string
     massage: string
@@ -38,17 +39,6 @@ export type RootStateType = {
     sidebar: SidebarType,
 
 }
-
-type AddPostCallbackActionType = {
-    type: 'ADD-POST-CALLBACK'
-    postMessage: string
-}
-type UpdateNewPostTextActionType = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newText: string
-
-}
-export type ActionType = AddPostCallbackActionType | UpdateNewPostTextActionType
 
 
 export type StoreType = {
@@ -140,7 +130,7 @@ export const store: StoreType = {
         this._callbackSubscriber = observer;
     },
 
-    dispatch(action:ActionType) { // {type: 'ADD-POST-CALLBACK'}
+    dispatch(action: ActionType) { // {type: 'ADD-POST-CALLBACK'}
         if (action.type === 'ADD-POST-CALLBACK') {
             const newPost: MyPostsDataType = {
                 id: v1(),
@@ -154,12 +144,24 @@ export const store: StoreType = {
             this._callbackSubscriber();
         }
     }
+}
+type AddPostCallbackActionType = ReturnType<typeof addPostCallbackAC>
+type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextAC>
+export type ActionType = AddPostCallbackActionType | UpdateNewPostTextActionType
 
+
+export const addPostCallbackAC = (postMessage: string) => {
+    return {
+        type:'ADD-POST-CALLBACK',
+        postMessage: postMessage
+    } as const
+}
+export const updateNewPostTextAC = (newText: string) => {
+    return {
+        type:'UPDATE-NEW-POST-TEXT',
+        newText: newText
+    } as const
 
 }
-
-
-
-
 
 

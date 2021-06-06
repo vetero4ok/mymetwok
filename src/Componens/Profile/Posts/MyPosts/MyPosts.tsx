@@ -1,7 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './MyPosts.module.css';
 import {Posts} from './Post/Posts';
-import {ActionType, MyPostsDataType} from '../../../../Redux/State';
+import {ActionType, addPostCallbackAC, MyPostsDataType, updateNewPostTextAC} from '../../../../Redux/State';
 
 
 type propsMyPostType = {
@@ -19,13 +19,13 @@ export const MyPosts = (props: propsMyPostType) => {
             likesCounts={p.likesCounts}
         />)
 
-
+    /** addPostCallbackAC створення dispatch обєкту з параметром props.newTextPost */
     const addPostCallback = () => {
         let validatedValue = props.newTextPost.trim()
         if (validatedValue) {
-            props.dispatch({type: 'ADD-POST-CALLBACK', postMessage: validatedValue})
+            props.dispatch(addPostCallbackAC(validatedValue))
         }
-        props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: ''})
+        props.dispatch(updateNewPostTextAC(''))
 
     }
     const onChangeKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -33,9 +33,13 @@ export const MyPosts = (props: propsMyPostType) => {
             addPostCallback()
         }
     }
+    /** Плохой тон писать props.dispatch(updateNewPostTextAC(e.currentTarget.value)) =>
+     *  либо через if(e.currentTarget) либо && */
     const updateNewPostText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: e.currentTarget.value})
+        e.currentTarget &&
+        props.dispatch(updateNewPostTextAC(e.currentTarget.value))
     }
+
 
     return (
 
@@ -43,18 +47,19 @@ export const MyPosts = (props: propsMyPostType) => {
             <div>
                 My posts
             </div>
+
             <div>
-                <div>
                     <textarea
                         value={props.newTextPost}
                         onChange={updateNewPostText}
                         onKeyPress={onChangeKeyPress}
+
                     />
-                </div>
-                <div>
-                    <button onClick={addPostCallback}>send</button>
-                </div>
             </div>
+            <div>
+                <button onClick={addPostCallback}>send</button>
+            </div>
+
             <div>
                 {myPostsElements}
             </div>
