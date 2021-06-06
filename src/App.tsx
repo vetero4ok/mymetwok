@@ -9,14 +9,14 @@ import {News} from './Componens/News/News';
 import {Music} from './Componens/Music/Music';
 import {Settings} from './Componens/Settings/Settings';
 import {Friends} from './Componens/Friends/Friends';
-import {RootStateType} from './Redux/State';
+import {ActionType, RootStateType} from './Redux/State';
 
 
 type propsAppType = {
 
     state:RootStateType
-    addPostCallback: (postMessage: string) => void
-    updateNewPostText:(newText: string) =>void
+    dispatch: (action: ActionType) => void
+
 }
 
 function App(props: propsAppType) {
@@ -34,8 +34,8 @@ function App(props: propsAppType) {
                     />}/>
                     <Route path="/profile" render={() => <Profile myPostsData={props.state.profilePage.myPostsData}
                                                                   newTextPost={props.state.profilePage.newTextPost}
-                                                                  addPostCallback={props.addPostCallback}
-                                                                  updateNewPostText = {props.updateNewPostText}
+                                                                  dispatch={props.dispatch}
+
                     />}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>

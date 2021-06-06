@@ -20,18 +20,16 @@ export type MassagesDataType = {
     id: string
     massage: string
 }
-type DialogPage = {
+export type DialogPage = {
     dialogsData: Array<DialogsDataType>,
     massagesData: Array<MassagesDataType>
 }
-
 export type FriendType = {
     id: string
     name: string
     avatar: string
 }
-
-type SidebarType = {
+export type SidebarType = {
     friendsData: Array<FriendType>,
 }
 export type RootStateType = {
@@ -41,15 +39,28 @@ export type RootStateType = {
 
 }
 
+type AddPostCallbackActionType = {
+    type: 'ADD-POST-CALLBACK'
+    postMessage: string
+}
+type UpdateNewPostTextActionType = {
+    type: 'UPDATE-NEW-POST-TEXT'
+    newText: string
+
+}
+export type ActionType = AddPostCallbackActionType | UpdateNewPostTextActionType
+
+
 export type StoreType = {
     _state: RootStateType
     getState: () => RootStateType
-    addPostCallback: (postMessage: string) => void
-    updateNewPostText: (newText: string) => void
     Subscribe: (observer: () => void) => void
     _callbackSubscriber: () => void
+    dispatch: (action: ActionType) => void
 
 }
+
+
 export const store: StoreType = {
     _state: {
         profilePage: {
@@ -117,29 +128,32 @@ export const store: StoreType = {
             ]
         },
     },
-    getState() {
-        return this._state;
-    },
-    addPostCallback(postMessage: string) {
-        const newPost: MyPostsDataType = {
-            id: v1(),
-            massage: postMessage,
-            likesCounts: 0
-        }
-        this._state.profilePage.myPostsData.push(newPost)
-        this._callbackSubscriber();
-    },
-    updateNewPostText(newText: string) {
-        this._state.profilePage.newTextPost = newText
-        this._callbackSubscriber();
-    },
     _callbackSubscriber() {
         console.log('State changed')
 
     },
+
+    getState() {
+        return this._state;
+    },
     Subscribe(observer) {
         this._callbackSubscriber = observer;
     },
+
+    dispatch(action:ActionType) { // {type: 'ADD-POST-CALLBACK'}
+        if (action.type === 'ADD-POST-CALLBACK') {
+            const newPost: MyPostsDataType = {
+                id: v1(),
+                massage: action.postMessage,
+                likesCounts: 0
+            }
+            this._state.profilePage.myPostsData.push(newPost)
+            this._callbackSubscriber();
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newTextPost = action.newText
+            this._callbackSubscriber();
+        }
+    }
 
 
 }

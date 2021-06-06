@@ -1,14 +1,13 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './MyPosts.module.css';
 import {Posts} from './Post/Posts';
-import {MyPostsDataType} from '../../../../Redux/State';
+import {ActionType, MyPostsDataType} from '../../../../Redux/State';
 
 
 type propsMyPostType = {
     myPostsData: Array<MyPostsDataType>
     newTextPost: string
-    addPostCallback: (postMessage: string) => void
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: ActionType) => void
 }
 
 
@@ -23,19 +22,19 @@ export const MyPosts = (props: propsMyPostType) => {
 
     const addPostCallback = () => {
         let validatedValue = props.newTextPost.trim()
-        if(validatedValue){
-            props.addPostCallback(validatedValue)
+        if (validatedValue) {
+            props.dispatch({type: 'ADD-POST-CALLBACK', postMessage: validatedValue})
         }
-        props.updateNewPostText('')
+        props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: ''})
 
     }
-    const onChangeKeyPress = (e:KeyboardEvent<HTMLTextAreaElement>) => {
+    const onChangeKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter') {
             addPostCallback()
         }
     }
-    const updateNewPostText = (e : ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewPostText(e.currentTarget.value)
+    const updateNewPostText = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: e.currentTarget.value})
     }
 
     return (
