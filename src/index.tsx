@@ -1,19 +1,19 @@
 import React from 'react';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import state, { Subscribe } from './Redux/State';
 import ReactDOM from 'react-dom';
 import App from './App';
-import  {addPostCallback,  updateNewPostText} from './Redux/State';
+import {store} from './Redux/State';
 
-export let renderEntireTree = () => {
+
+export const renderEntireTree = () => {
 
     ReactDOM.render(
         <React.StrictMode>
             <App
-                state={state}
-                addPostCallback={addPostCallback}
-                updateNewPostText = {updateNewPostText}
+                state={store.getState()}
+                addPostCallback={store.addPostCallback.bind(store)}
+                updateNewPostText = {store.updateNewPostText.bind(store)}
 
             />
         </React.StrictMode>,
@@ -22,8 +22,11 @@ export let renderEntireTree = () => {
 
 }
 
+
+store.Subscribe(renderEntireTree);
 renderEntireTree();
-Subscribe(renderEntireTree)
+
+
 
 
 
