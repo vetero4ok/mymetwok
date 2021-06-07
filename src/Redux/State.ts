@@ -1,7 +1,6 @@
 import {v1} from 'uuid';
 
 
-
 export type MyPostsDataType = {
     id: string
     massage: string
@@ -11,7 +10,6 @@ type ProfilePage = {
     newTextPost: string
     myPostsData: Array<MyPostsDataType>,
 }
-
 export type DialogsDataType = {
     id: string
     name: string
@@ -22,7 +20,8 @@ export type MassagesDataType = {
     massage: string
 }
 export type DialogPage = {
-    dialogsData: Array<DialogsDataType>,
+    newTextMassages: string
+    dialogsData: Array<DialogsDataType>
     massagesData: Array<MassagesDataType>
 }
 export type FriendType = {
@@ -63,6 +62,7 @@ export const store: StoreType = {
 
         },
         dialogPage: {
+
             dialogsData: [
                 {
                     id: v1(),
@@ -85,6 +85,7 @@ export const store: StoreType = {
                     avatar: 'https://buddy.ghostpool.com/wp-content/uploads/group-avatars/34/1c7da6471476e42b543812f35ef23d2f-bpthumb.jpg',
                 },
             ],
+            newTextMassages: '',
             massagesData: [
                 {id: v1(), massage: 'Hi!'},
                 {id: v1(), massage: 'How are you?'},
@@ -142,26 +143,55 @@ export const store: StoreType = {
         } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
             this._state.profilePage.newTextPost = action.newText
             this._callbackSubscriber();
+        } else if (action.type === 'ADD-MESSAGE-CALLBACK') {
+            const newMessage: MassagesDataType = {
+                id: v1(),
+                massage: action.message,
+            }
+            this._state.dialogPage.newTextMassages = ''
+            this._state.dialogPage.massagesData.push(newMessage)
+            this._callbackSubscriber();
+        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+            this._state.dialogPage.newTextMassages = action.newMessage
+            this._callbackSubscriber();
         }
     }
 }
+
+
 type AddPostCallbackActionType = ReturnType<typeof addPostCallbackAC>
 type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextAC>
+type UpdateNewMessageTextActionType = ReturnType<typeof updateNewMessageTextAC>
+type AddMessageCallbackActionType = ReturnType<typeof addMessageCallbackAC>
+
 export type ActionType = AddPostCallbackActionType | UpdateNewPostTextActionType
+    | AddMessageCallbackActionType | UpdateNewMessageTextActionType
 
 
 export const addPostCallbackAC = (postMessage: string) => {
     return {
-        type:'ADD-POST-CALLBACK',
+        type: 'ADD-POST-CALLBACK',
         postMessage: postMessage
     } as const
 }
 export const updateNewPostTextAC = (newText: string) => {
     return {
-        type:'UPDATE-NEW-POST-TEXT',
+        type: 'UPDATE-NEW-POST-TEXT',
         newText: newText
     } as const
 
 }
+export const addMessageCallbackAC = (message: string) => {
+    return {
+        type: 'ADD-MESSAGE-CALLBACK',
+        message: message
+    } as const
+}
+export const updateNewMessageTextAC = (newMessage: string) => {
+    return {
+        type: 'UPDATE-NEW-MESSAGE-TEXT',
+        newMessage: newMessage
+    } as const
 
+}
 

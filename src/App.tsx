@@ -14,7 +14,7 @@ import {ActionType, RootStateType} from './Redux/State';
 
 type propsAppType = {
 
-    state:RootStateType
+    state: RootStateType
     dispatch: (action: ActionType) => void
 
 }
@@ -27,16 +27,20 @@ function App(props: propsAppType) {
                 <Header/>
                 <Navbar friendsData={props.state.sidebar.friendsData}/>
                 <div className="app-wrapper-content">
-                    <Route path="/dialogs" render={() => <Dialogs dialogsData={props.state.dialogPage.dialogsData}
-                                                                  massagesData={props.state.dialogPage.massagesData}
+                    <Route path="/dialogs" render={() =>
+                        <Dialogs dialogsData={props.state.dialogPage.dialogsData}
+                                 massagesData={props.state.dialogPage.massagesData}
+                                 newTextMassages={props.state.dialogPage.newTextMassages}
+                                 dispatch={props.dispatch}
 
 
-                    />}/>
-                    <Route path="/profile" render={() => <Profile myPostsData={props.state.profilePage.myPostsData}
-                                                                  newTextPost={props.state.profilePage.newTextPost}
-                                                                  dispatch={props.dispatch}
+                        />}/>
+                    <Route path="/profile" render={() =>
+                        <Profile myPostsData={props.state.profilePage.myPostsData}
+                                 newTextPost={props.state.profilePage.newTextPost}
+                                 dispatch={props.dispatch}
 
-                    />}/>
+                        />}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>

@@ -1,14 +1,18 @@
-import React from 'react';
+import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './Dialogs.module.css'
 import {Dialog} from './DialogsItems/DialogsItem';
 import {Message} from './Message/Message';
-import {DialogsDataType, MassagesDataType} from '../../Redux/State';
-import {AlternativeMessage} from './Message/AlternativeMessage';
+import {
+    ActionType, DialogsDataType, MassagesDataType,
+    addMessageCallbackAC, updateNewMessageTextAC,
+} from '../../Redux/State';
 
 
 type propsDialogsType = {
+    newTextMassages: string
     massagesData: Array<MassagesDataType>
     dialogsData: Array<DialogsDataType>
+    dispatch: (action: ActionType) => void
 
 }
 
@@ -24,16 +28,31 @@ export function Dialogs(props: propsDialogsType) {
         </div>
     )
     const dialogMessage = props.massagesData.map(d =>
-    <div key={d.id}>
-        <Message
-            message={d.massage}
-        />
-        <AlternativeMessage
-            message={d.massage}
-        />
-    </div>
+        <div key={d.id}>
+            <Message
+                message={d.massage}
+            />
+            {/*<AlternativeMessage*/}
+            {/*    message={d.massage}*/}
+            {/*/>*/}
+        </div>
     )
-
+    const addMessageCallback = () => {
+        let validatedValue = props.newTextMassages.trim()
+        if(validatedValue){
+            props.dispatch(addMessageCallbackAC(validatedValue))
+        }
+        props.dispatch(updateNewMessageTextAC(''))
+    }
+    const updateNewMessageText = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        e.currentTarget &&
+        props.dispatch(updateNewMessageTextAC(e.currentTarget.value))
+    }
+    const onChangeKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.key === 'Enter') {
+            addMessageCallback()
+        }
+    }
 
     return (
         <div className={s.dialogs}>
@@ -46,8 +65,14 @@ export function Dialogs(props: propsDialogsType) {
                 {dialogMessage}
             </div>
             <div>
-                <textarea/>
-                <button>send</button>
+                <textarea
+                    value={props.newTextMassages}
+                    placeholder="Enter your message"
+                    onChange={updateNewMessageText}
+                    onKeyPress={onChangeKeyPress}
+                />
+
+                <button onClick={addMessageCallback}>send</button>
             </div>
         </div>
     )
