@@ -1,7 +1,8 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './MyPosts.module.css';
 import {Posts} from './Post/Posts';
-import {ActionType, addPostCallbackAC, MyPostsDataType, updateNewPostTextAC} from '../../../../Redux/State';
+import {ActionType,  MyPostsDataType, } from '../../../../Redux/State';
+import { addPostCallbackAC, updateNewPostTextAC } from '../../../../Redux/profilePageReducer';
 
 
 type propsMyPostType = {

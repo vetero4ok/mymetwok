@@ -4,8 +4,8 @@ import {Dialog} from './DialogsItems/DialogsItem';
 import {Message} from './Message/Message';
 import {
     ActionType, DialogsDataType, MassagesDataType,
-    addMessageCallbackAC, updateNewMessageTextAC,
 } from '../../Redux/State';
+import { addMessageCallbackAC, updateNewMessageTextAC } from '../../Redux/dialogPageReducer';
 
 
 type propsDialogsType = {

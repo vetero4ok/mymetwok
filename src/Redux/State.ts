@@ -1,4 +1,6 @@
 import {v1} from 'uuid';
+import {AddMessageCallbackActionType, dialogPageReducer, UpdateNewMessageTextActionType} from './dialogPageReducer';
+import {AddPostCallbackActionType, profilePageReducer, UpdateNewPostTextActionType} from './profilePageReducer';
 
 
 export type MyPostsDataType = {
@@ -6,7 +8,7 @@ export type MyPostsDataType = {
     massage: string
     likesCounts: number
 }
-type ProfilePage = {
+export type ProfilePage = {
     newTextPost: string
     myPostsData: Array<MyPostsDataType>,
 }
@@ -38,7 +40,8 @@ export type RootStateType = {
     sidebar: SidebarType,
 
 }
-
+export type ActionType = AddPostCallbackActionType | UpdateNewPostTextActionType
+    | AddMessageCallbackActionType | UpdateNewMessageTextActionType
 
 export type StoreType = {
     _state: RootStateType
@@ -132,66 +135,21 @@ export const store: StoreType = {
     },
 
     dispatch(action: ActionType) { // {type: 'ADD-POST-CALLBACK'}
-        if (action.type === 'ADD-POST-CALLBACK') {
-            const newPost: MyPostsDataType = {
-                id: v1(),
-                massage: action.postMessage,
-                likesCounts: 0
-            }
-            this._state.profilePage.myPostsData.push(newPost)
-            this._callbackSubscriber();
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newTextPost = action.newText
-            this._callbackSubscriber();
-        } else if (action.type === 'ADD-MESSAGE-CALLBACK') {
-            const newMessage: MassagesDataType = {
-                id: v1(),
-                massage: action.message,
-            }
-            this._state.dialogPage.newTextMassages = ''
-            this._state.dialogPage.massagesData.push(newMessage)
-            this._callbackSubscriber();
-        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
-            this._state.dialogPage.newTextMassages = action.newMessage
-            this._callbackSubscriber();
-        }
+
+        this._state.profilePage = profilePageReducer(this._state.profilePage,action)
+        this._state.dialogPage = dialogPageReducer(this._state.dialogPage,action)
+        this._callbackSubscriber();
+
     }
 }
 
 
-type AddPostCallbackActionType = ReturnType<typeof addPostCallbackAC>
-type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextAC>
-type UpdateNewMessageTextActionType = ReturnType<typeof updateNewMessageTextAC>
-type AddMessageCallbackActionType = ReturnType<typeof addMessageCallbackAC>
-
-export type ActionType = AddPostCallbackActionType | UpdateNewPostTextActionType
-    | AddMessageCallbackActionType | UpdateNewMessageTextActionType
 
 
-export const addPostCallbackAC = (postMessage: string) => {
-    return {
-        type: 'ADD-POST-CALLBACK',
-        postMessage: postMessage
-    } as const
-}
-export const updateNewPostTextAC = (newText: string) => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT',
-        newText: newText
-    } as const
 
-}
-export const addMessageCallbackAC = (message: string) => {
-    return {
-        type: 'ADD-MESSAGE-CALLBACK',
-        message: message
-    } as const
-}
-export const updateNewMessageTextAC = (newMessage: string) => {
-    return {
-        type: 'UPDATE-NEW-MESSAGE-TEXT',
-        newMessage: newMessage
-    } as const
 
-}
+
+
+
+
 
