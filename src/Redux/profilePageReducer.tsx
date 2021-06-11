@@ -1,10 +1,23 @@
 import {v1} from 'uuid';
-import {ActionType, MyPostsDataType, ProfilePage} from './State';
+import {ActionType, MyPostsDataType, ProfilePage} from './Store';
 export type AddPostCallbackActionType = ReturnType<typeof addPostCallbackAC>
 export type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextAC>
 const ADD_POST_CALLBACK = 'ADD-POST-CALLBACK';
 const UPDATE_NEW_POST_TEXT='UPDATE-NEW-POST-TEXT';
-export const profilePageReducer = (state: ProfilePage, action: ActionType) => {
+
+let InitialState = {
+    newTextPost: '',
+    myPostsData: [
+        {id: v1(), massage: 'Hi, how are you?', likesCounts: 12},
+        {id: v1(), massage: 'It is my first post!', likesCounts: 15},
+        {id: v1(), massage: 'hey!', likesCounts: 1},
+    ]
+
+}
+
+
+
+export const profilePageReducer = (state: ProfilePage = InitialState, action: ActionType) => {
 
     switch (action.type) {
         case ADD_POST_CALLBACK:

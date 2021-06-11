@@ -3,7 +3,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import ReactDOM from 'react-dom';
 import App from './App';
-import {store} from './Redux/State';
+import {store} from './Redux/Redux-Store';
 
 
 export const renderEntireTree = () => {
@@ -22,9 +22,9 @@ export const renderEntireTree = () => {
 
 }
 
-
-store.Subscribe(renderEntireTree);
 renderEntireTree();
+store.subscribe(renderEntireTree);
+
 
 
 

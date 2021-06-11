@@ -1,5 +1,5 @@
 import React from 'react';
-import {FriendType} from '../../../Redux/State';
+import {FriendType} from '../../../Redux/Store';
 import s from './BlockFriends.module.css'
 
 

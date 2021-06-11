@@ -9,7 +9,7 @@ import {News} from './Componens/News/News';
 import {Music} from './Componens/Music/Music';
 import {Settings} from './Componens/Settings/Settings';
 import {Friends} from './Componens/Friends/Friends';
-import {ActionType, RootStateType} from './Redux/State';
+import {ActionType, RootStateType} from './Redux/Store';
 
 
 type propsAppType = {

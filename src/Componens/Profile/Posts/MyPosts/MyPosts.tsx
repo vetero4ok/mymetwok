@@ -1,7 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './MyPosts.module.css';
 import {Posts} from './Post/Posts';
-import {ActionType,  MyPostsDataType, } from '../../../../Redux/State';
+import {ActionType,  MyPostsDataType, } from '../../../../Redux/Store';
 import { addPostCallbackAC, updateNewPostTextAC } from '../../../../Redux/profilePageReducer';
 
 

@@ -4,7 +4,7 @@ import {Dialog} from './DialogsItems/DialogsItem';
 import {Message} from './Message/Message';
 import {
     ActionType, DialogsDataType, MassagesDataType,
-} from '../../Redux/State';
+} from '../../Redux/Store';
 import { addMessageCallbackAC, updateNewMessageTextAC } from '../../Redux/dialogPageReducer';
 
 

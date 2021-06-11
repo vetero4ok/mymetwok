@@ -46,7 +46,7 @@ export type ActionType = AddPostCallbackActionType | UpdateNewPostTextActionType
 export type StoreType = {
     _state: RootStateType
     getState: () => RootStateType
-    Subscribe: (observer: () => void) => void
+    subscribe: (observer: () => void) => void
     _callbackSubscriber: () => void
     dispatch: (action: ActionType) => void
 
@@ -130,7 +130,7 @@ export const store: StoreType = {
     getState() {
         return this._state;
     },
-    Subscribe(observer) {
+    subscribe(observer) {  //оригінальна функція в редаксі пишеться з маленької букви
         this._callbackSubscriber = observer;
     },
 
