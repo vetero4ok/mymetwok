@@ -2,18 +2,15 @@ import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './Dialogs.module.css'
 import {Dialog} from './DialogsItems/DialogsItem';
 import {Message} from './Message/Message';
-import {
-    ActionType, DialogsDataType, MassagesDataType,
-} from '../../Redux/Store';
-import { addMessageCallbackAC, updateNewMessageTextAC } from '../../Redux/dialogPageReducer';
+import {DialogsDataType, MassagesDataType} from '../../Redux/Store';
 
 
 type propsDialogsType = {
     newTextMassages: string
     massagesData: Array<MassagesDataType>
     dialogsData: Array<DialogsDataType>
-    dispatch: (action: ActionType) => void
-
+    addMessageCallback: (newText: string) => void
+    updateNewMessageText: (value: string) => void
 }
 
 export function Dialogs(props: propsDialogsType) {
@@ -39,14 +36,14 @@ export function Dialogs(props: propsDialogsType) {
     )
     const addMessageCallback = () => {
         let validatedValue = props.newTextMassages.trim()
-        if(validatedValue){
-            props.dispatch(addMessageCallbackAC(validatedValue))
+        if (validatedValue) {
+            props.addMessageCallback(validatedValue)
         }
-        props.dispatch(updateNewMessageTextAC(''))
+        props.updateNewMessageText('')
     }
     const updateNewMessageText = (e: ChangeEvent<HTMLTextAreaElement>) => {
         e.currentTarget &&
-        props.dispatch(updateNewMessageTextAC(e.currentTarget.value))
+        props.updateNewMessageText(e.currentTarget.value)
     }
     const onChangeKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter') {

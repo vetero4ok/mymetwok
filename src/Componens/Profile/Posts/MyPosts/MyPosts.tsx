@@ -1,14 +1,15 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './MyPosts.module.css';
 import {Posts} from './Post/Posts';
-import {ActionType,  MyPostsDataType, } from '../../../../Redux/Store';
-import { addPostCallbackAC, updateNewPostTextAC } from '../../../../Redux/profilePageReducer';
+import {  MyPostsDataType, } from '../../../../Redux/Store';
+
 
 
 type propsMyPostType = {
     myPostsData: Array<MyPostsDataType>
     newTextPost: string
-    dispatch: (action: ActionType) => void
+    addPostCallback:(newPost:string) =>void
+    updateNewPostText:(text:string) => void
 }
 
 
@@ -24,9 +25,9 @@ export const MyPosts = (props: propsMyPostType) => {
     const addPostCallback = () => {
         let validatedValue = props.newTextPost.trim()
         if (validatedValue) {
-            props.dispatch(addPostCallbackAC(validatedValue))
+            props.addPostCallback(validatedValue)
         }
-        props.dispatch(updateNewPostTextAC(''))
+        props.updateNewPostText('')
 
     }
     const onChangeKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -38,7 +39,7 @@ export const MyPosts = (props: propsMyPostType) => {
      *  либо через if(e.currentTarget) либо && */
     const updateNewPostText = (e: ChangeEvent<HTMLTextAreaElement>) => {
         e.currentTarget &&
-        props.dispatch(updateNewPostTextAC(e.currentTarget.value))
+        props.updateNewPostText(e.currentTarget.value)
     }
 
 

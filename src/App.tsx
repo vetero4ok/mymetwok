@@ -3,13 +3,13 @@ import './App.css';
 import {Header} from './Componens/Header/Header';
 import {Navbar} from './Componens/Navbar/Navbar';
 import {Profile} from './Componens/Profile/Profile';
-import {Dialogs} from './Componens/Dialogs/Dialogs';
 import {BrowserRouter, Route} from 'react-router-dom';
 import {News} from './Componens/News/News';
 import {Music} from './Componens/Music/Music';
 import {Settings} from './Componens/Settings/Settings';
 import {Friends} from './Componens/Friends/Friends';
 import {ActionType, RootStateType} from './Redux/Store';
+import { DialogsContainer } from './Componens/Dialogs/DialogsContainer';
 
 
 type propsAppType = {
@@ -28,16 +28,13 @@ function App(props: propsAppType) {
                 <Navbar friendsData={props.state.sidebar.friendsData}/>
                 <div className="app-wrapper-content">
                     <Route path="/dialogs" render={() =>
-                        <Dialogs dialogsData={props.state.dialogPage.dialogsData}
-                                 massagesData={props.state.dialogPage.massagesData}
-                                 newTextMassages={props.state.dialogPage.newTextMassages}
-                                 dispatch={props.dispatch}
-
+                        <DialogsContainer
+                            state={props.state}
+                            dispatch={props.dispatch}
 
                         />}/>
                     <Route path="/profile" render={() =>
-                        <Profile myPostsData={props.state.profilePage.myPostsData}
-                                 newTextPost={props.state.profilePage.newTextPost}
+                        <Profile state={props.state}
                                  dispatch={props.dispatch}
 
                         />}/>
