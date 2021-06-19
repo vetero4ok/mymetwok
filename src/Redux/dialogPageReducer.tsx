@@ -40,8 +40,8 @@ const InitialState = {
 }
 
 
-const ADD_MESSAGE_CALLBACK = 'ADD-MESSAGE-CALLBACK'
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
+const ADD_MESSAGE_CALLBACK = 'ADD-MESSAGE-CALLBACK' as const
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT' as const
 export const dialogPageReducer = (state: DialogPage = InitialState, action: ActionType) => {
 
     switch (action.type) {

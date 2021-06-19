@@ -7,17 +7,17 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import {News} from './Componens/News/News';
 import {Music} from './Componens/Music/Music';
 import {Settings} from './Componens/Settings/Settings';
-import {Friends} from './Componens/Friends/Friends';
-import {ActionType, RootStateType} from './Redux/Store';
-import { DialogsContainer } from './Componens/Dialogs/DialogsContainer';
+import {DialogsContainer} from './Componens/Dialogs/DialogsContainer';
+
 
 
 type propsAppType = {
-
-    state: RootStateType
-    dispatch: (action: ActionType) => void
+    // store:StoreType
+    // state: RootStateType
+    // dispatch: (action: ActionType) => void
 
 }
+
 
 function App(props: propsAppType) {
 
@@ -25,23 +25,17 @@ function App(props: propsAppType) {
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
-                <Navbar friendsData={props.state.sidebar.friendsData}/>
+                <Navbar/>
                 <div className="app-wrapper-content">
                     <Route path="/dialogs" render={() =>
-                        <DialogsContainer
-                            state={props.state}
-                            dispatch={props.dispatch}
-
-                        />}/>
+                        <DialogsContainer/>}/>
                     <Route path="/profile" render={() =>
-                        <Profile state={props.state}
-                                 dispatch={props.dispatch}
-
-                        />}/>
+                        <Profile/>}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>
-                    <Route path="/friends" render={() => <Friends friendsData={props.state.sidebar.friendsData}/>}/>
+                    {/*<Route path="/friends" render={() => <Friends/>}/>*/}
+
 
                 </div>
 

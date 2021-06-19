@@ -17,6 +17,7 @@ export const MyPosts = (props: propsMyPostType) => {
 
     const myPostsElements = props.myPostsData.map(p =>
         <Posts
+            key={p.id}
             massage={p.massage}
             likesCounts={p.likesCounts}
         />)

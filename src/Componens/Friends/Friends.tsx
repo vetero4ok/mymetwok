@@ -1,14 +1,16 @@
 import React from 'react';
 import s from './Friends.module.css';
-import {FriendType} from '../../Redux/Store';
+import {StoreType} from '../../Redux/Redux-Store';
+
 
 
 type PropsFriendsType = {
-    friendsData:Array<FriendType>
+ store: StoreType
 }
 
 export const Friends = (props:PropsFriendsType) => {
-    const friend = props.friendsData.map(f=>{
+
+    const friend = props.store.getState().sidebar.friendsData.map(f=>{
         return(
         <div key={f.id}>
             <div>

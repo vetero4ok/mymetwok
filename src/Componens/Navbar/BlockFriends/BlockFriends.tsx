@@ -1,14 +1,14 @@
 import React from 'react';
-import {FriendType} from '../../../Redux/Store';
 import s from './BlockFriends.module.css'
+import {StoreType} from '../../../Redux/Redux-Store';
 
 
 type PropsFriendsType = {
-    friendsData: Array<FriendType>
+   store: StoreType
 }
 
 export const BlockFriends = (props: PropsFriendsType) => {
-    const friend = props.friendsData.map(f => {
+    const friend = props.store.getState().sidebar.friendsData.map(f => {
         return (
             <div key={f.id} className={s.items} >
                 <div>

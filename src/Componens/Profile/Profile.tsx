@@ -1,27 +1,30 @@
 import React from 'react';
-import classes from './Profile.module.css';
-
+import s from './Profile.module.css';
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
-import {ActionType, RootStateType} from '../../Redux/Store';
 import {MyPostsContainer} from './Posts/MyPosts/MyPostsContainer';
+import StoreContext from '../../StoreContext';
+
 
 
 type propsProfileType = {
-    state: RootStateType
-    dispatch: (action: ActionType) => void
+    // state: RootStateType
+    // dispatch: (action: ActionType) => void
 }
 
 export const Profile = (props: propsProfileType) => {
     return (
-        <div className={classes.content}> Main content
+        <div className={s.content}> Main content
             <ProfileInfo/>
-            <MyPostsContainer
-                state={props.state}
-                dispatch={props.dispatch}
 
-            />
+            <StoreContext.Consumer>
+                {store =>
+                    <MyPostsContainer
+                        store={store}
+                    />}
+            </StoreContext.Consumer>
+
+
         </div>
 
     );
-
 }

@@ -1,35 +1,32 @@
 import React from 'react';
-import {ActionType, RootStateType,} from '../../../../Redux/Store';
 import {addPostCallbackAC, updateNewPostTextAC} from '../../../../Redux/profilePageReducer';
 import {MyPosts} from './MyPosts';
+import {StoreType} from '../../../../Redux/Redux-Store';
 
 
 type propsMyPostContainerType = {
-    state: RootStateType
-    dispatch: (action: ActionType) => void
+    store: StoreType
 }
 
+export function MyPostsContainer(props: propsMyPostContainerType){
 
-export const MyPostsContainer = (props: propsMyPostContainerType) => {
-    let myPostsData = props.state.profilePage.myPostsData
-    let newTextPost = props.state.profilePage.newTextPost
+                let state = props.store.getState()
+                let myPostsData = state.profilePage.myPostsData
+                let newTextPost = state.profilePage.newTextPost
+                const addPostCallback = (newPost: string) => {
+                    props.store.dispatch(addPostCallbackAC(newPost))
+                }
 
+                const updateNewPostText = (text: string) => {
+                    props.store.dispatch(updateNewPostTextAC(text))
+                }
+                return (
+                    <MyPosts
+                        myPostsData={myPostsData}
+                        newTextPost={newTextPost}
+                        updateNewPostText={updateNewPostText}
+                        addPostCallback={addPostCallback}
+                    />
+                );
 
-    const addPostCallback = (newPost: string) => {
-        props.dispatch(addPostCallbackAC(newPost))
-    }
-
-    const updateNewPostText = (text: string) => {
-        props.dispatch(updateNewPostTextAC(text))
-    }
-
-
-    return (
-        <MyPosts
-            myPostsData={myPostsData}
-            newTextPost={newTextPost}
-            updateNewPostText={updateNewPostText}
-            addPostCallback={addPostCallback}
-        />
-    );
 }

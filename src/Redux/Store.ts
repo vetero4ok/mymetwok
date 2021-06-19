@@ -43,7 +43,7 @@ export type RootStateType = {
 export type ActionType = AddPostCallbackActionType | UpdateNewPostTextActionType
     | AddMessageCallbackActionType | UpdateNewMessageTextActionType
 
-export type StoreType = {
+ type StoreType = {
     _state: RootStateType
     getState: () => RootStateType
     subscribe: (observer: () => void) => void
@@ -53,7 +53,7 @@ export type StoreType = {
 }
 
 
-export const store: StoreType = {
+ const store: StoreType = {
     _state: {
         profilePage: {
             newTextPost: '',
@@ -126,14 +126,12 @@ export const store: StoreType = {
         console.log('State changed')
 
     },
-
     getState() {
         return this._state;
     },
     subscribe(observer) {  //оригінальна функція в редаксі пишеться з маленької букви
         this._callbackSubscriber = observer;
     },
-
     dispatch(action: ActionType) { // {type: 'ADD-POST-CALLBACK'}
 
         this._state.profilePage = profilePageReducer(this._state.profilePage,action)
