@@ -7,19 +7,13 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import {News} from './Componens/News/News';
 import {Music} from './Componens/Music/Music';
 import {Settings} from './Componens/Settings/Settings';
-import {DialogsContainer} from './Componens/Dialogs/DialogsContainer';
+import { DialogsContainer } from './Componens/Dialogs/DialogsContainer';
 
 
 
-type propsAppType = {
-    // store:StoreType
-    // state: RootStateType
-    // dispatch: (action: ActionType) => void
-
-}
 
 
-function App(props: propsAppType) {
+function App() {
 
     return (
         <BrowserRouter>
@@ -27,10 +21,8 @@ function App(props: propsAppType) {
                 <Header/>
                 <Navbar/>
                 <div className="app-wrapper-content">
-                    <Route path="/dialogs" render={() =>
-                        <DialogsContainer/>}/>
-                    <Route path="/profile" render={() =>
-                        <Profile/>}/>
+                    <Route path="/dialogs" render={() =><DialogsContainer/>}/>
+                    <Route path="/profile" render={() =><Profile/>}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>
