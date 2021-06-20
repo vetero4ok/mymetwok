@@ -3,11 +3,7 @@ import {NavLink} from 'react-router-dom';
 import s from './Navbar.module.css';
 
 
-type propsNavbarType = {
-    //friendsData:Array<FriendType>
-}
-
-export const Navbar = (props:propsNavbarType) => {
+export const Navbar = () => {
     return (
         <nav className={s.sidebar}> {/*Sidebar*/}
             <div className={s.item}>
@@ -29,10 +25,7 @@ export const Navbar = (props:propsNavbarType) => {
             {/*    <NavLink to="/friends" activeClassName={s.activeLink}>Friends</NavLink>*/}
             {/*</div>*/}
             {/*<div className={s.blockFriends} >*/}
-            {/*    */}
-            {/*   <BlockFriends*/}
-            {/*       // friendsData={props.friendsData}*/}
-            {/*   />*/}
+            {/*   <BlockFriends friendsData={props.friendsData} />*/}
             {/*</div>*/}
         </nav>
 

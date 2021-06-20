@@ -1,6 +1,6 @@
 import {addPostCallbackAC, updateNewPostTextAC} from '../../../../Redux/profilePageReducer';
 import {MyPosts} from './MyPosts';
-import {AppStateType} from '../../../../Redux/Redux-Store';
+import {AppDispatch, AppStateType} from '../../../../Redux/Redux-Store';
 import {connect} from 'react-redux';
 
 
@@ -11,7 +11,7 @@ import {connect} from 'react-redux';
         }
     }
 
-    let mapDispatchToProps = (dispatch: any) => {
+    let mapDispatchToProps = (dispatch: AppDispatch) => {
         return {
             updateNewPostText: (text: string) => {
                 dispatch(updateNewPostTextAC(text))

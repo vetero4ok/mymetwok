@@ -1,10 +1,6 @@
 import {ActionType, DialogPage, MassagesDataType} from './Store';
 import {v1} from 'uuid';
 
-export type UpdateNewMessageTextActionType = ReturnType<typeof updateNewMessageTextAC>
-export type AddMessageCallbackActionType = ReturnType<typeof addMessageCallbackAC>
-
-
 const InitialState = {
 
     dialogsData: [
@@ -45,17 +41,22 @@ const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT' as const
 export const dialogPageReducer = (state: DialogPage = InitialState, action: ActionType) => {
 
     switch (action.type) {
-        case ADD_MESSAGE_CALLBACK:
+        case ADD_MESSAGE_CALLBACK: {
             const newMessage: MassagesDataType = {
                 id: v1(),
                 massage: action.message,
             }
-            state.newTextMassages = ''
-            state.massagesData.push(newMessage)
-            return state
+            return {
+                ...state,
+                newTextMassages: '',
+                massagesData: [...state.massagesData, newMessage]
+            }
+        }
         case UPDATE_NEW_MESSAGE_TEXT:
-            state.newTextMassages = action.newMessage
-            return state
+            return {
+                ...state,
+                newTextMassages: action.newMessage
+            }
         default:
             return state
     }
@@ -74,3 +75,5 @@ export const updateNewMessageTextAC = (newMessage: string) => {
     } as const
 
 }
+export type UpdateNewMessageTextActionType = ReturnType<typeof updateNewMessageTextAC>
+export type AddMessageCallbackActionType = ReturnType<typeof addMessageCallbackAC>
