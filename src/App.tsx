@@ -8,6 +8,8 @@ import {News} from './Componens/News/News';
 import {Music} from './Componens/Music/Music';
 import {Settings} from './Componens/Settings/Settings';
 import { DialogsContainer } from './Componens/Dialogs/DialogsContainer';
+import {UsersContainer} from './Componens/Users/UsersContainer';
+
 
 
 
@@ -27,6 +29,8 @@ function App() {
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>
+                    <Route path="/settings" render={() => <Settings/>}/>
+                    <Route path="/users" render={() => <UsersContainer/>}/>
                     {/*<Route path="/friends" render={() => <Friends/>}/>*/}
 
 

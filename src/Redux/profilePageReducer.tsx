@@ -12,7 +12,7 @@ let InitialState = {
 
 const ADD_POST_CALLBACK = 'ADD-POST-CALLBACK' as const;
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT' as const;
-export const profilePageReducer = (state: ProfilePage = InitialState, action: ActionType) => {
+export const profilePageReducer = (state: ProfilePage = InitialState, action: ActionType):ProfilePage => {
 
     switch (action.type) {
         case ADD_POST_CALLBACK: {

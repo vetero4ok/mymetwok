@@ -1,6 +1,7 @@
 import {v1} from 'uuid';
 import {AddMessageCallbackActionType, dialogPageReducer, UpdateNewMessageTextActionType} from './dialogPageReducer';
 import {AddPostCallbackActionType, profilePageReducer, UpdateNewPostTextActionType} from './profilePageReducer';
+import {FollowACType, setUsersACType, UnfollowACType} from './usersPageReducer';
 
 
 export type MyPostsDataType = {
@@ -41,7 +42,7 @@ export type RootStateType = {
 
 }
 export type ActionType = AddPostCallbackActionType | UpdateNewPostTextActionType
-    | AddMessageCallbackActionType | UpdateNewMessageTextActionType
+    | AddMessageCallbackActionType | UpdateNewMessageTextActionType |FollowACType|UnfollowACType|setUsersACType
 
  type StoreType = {
     _state: RootStateType

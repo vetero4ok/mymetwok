@@ -2,7 +2,7 @@
 import {addMessageCallbackAC, updateNewMessageTextAC} from '../../Redux/dialogPageReducer';
 import {Dialogs} from './Dialogs';
 import {connect} from 'react-redux';
-import {AppStateType} from '../../Redux/Redux-Store';
+import {AppDispatch, AppStateType} from '../../Redux/Redux-Store';
 
 
 let mapStateToProps = (state: AppStateType) => {
@@ -12,7 +12,7 @@ let mapStateToProps = (state: AppStateType) => {
         massagesData: state.dialogPage.massagesData
     }
 }
-let mapDispatchToProps = (dispatch: any) => {
+let mapDispatchToProps = (dispatch: AppDispatch) => {
     return {
         updateNewMessageText: (value: string) => {
             dispatch(updateNewMessageTextAC(value))
