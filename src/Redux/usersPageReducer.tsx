@@ -1,20 +1,24 @@
 import {ActionType} from './Store';
-import {v1} from 'uuid';
+
 
 let InitialState = {
     users: []
 }
-export type locationType = {
-    city: string
-    country: string
+export type photosType = {
+    small:string
+    large:string
 }
+// export type locationType = {
+//     city: string
+//     country: string
+// }
 export type userType = {
-    id: string
-    photoUrl: string
+    id: number
+    photos: photosType
     followed: boolean
-    fullName: string
+    name: string
     status: string
-    location: locationType
+   // location: locationType
 }
 export type UsersStateType = {
     users: Array<userType>
@@ -53,13 +57,13 @@ export const usersPageReducer = (state: UsersStateType = InitialState, action: A
     }
 }
 
-export const followAC = (userID: string) => {
+export const followAC = (userID: number) => {
     return {
         type: 'FOLLOW',
         userID
     } as const
 }
-export const unfollowAC = (userID: string) => {
+export const unfollowAC = (userID: number) => {
     return {
         type: 'UNFOLLOW',
         userID

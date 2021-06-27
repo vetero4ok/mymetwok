@@ -16,4 +16,4 @@ export let store =  createStore(Reducers);
 export type AppStateType = ReturnType<typeof Reducers>
 export type StoreType = typeof store
 export type AppDispatch = typeof store.dispatch
-//export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>
