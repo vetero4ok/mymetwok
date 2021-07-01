@@ -1,8 +1,10 @@
 let InitialState = {
     users: [],
     pageSize: 5,
-    totalUsersCount: 20,
+    totalUsersCount: 0,
     currentPages: 1,
+    isFetching: false,
+
 
 }
 export type photosType = {
@@ -26,6 +28,7 @@ export type UsersStateType = {
     pageSize: number
     totalUsersCount: number
     currentPages: number
+    isFetching: boolean
 
 }
 
@@ -34,14 +37,16 @@ const UNFOLLOW = 'UNFOLLOW' as const
 const SET_USERS = 'SET-USERS' as const
 const SET_CURRENT_PAGE = 'SET-CURRENT_PAGE' as const
 const TOTAL_USER_COUNT = 'TOTAL-USER-COUNT' as const
+const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING' as const
 
 export type ActionTypeUserReducer = FollowACType
     | UnfollowACType
     | setUsersACType
     | setCurrantPageACType
     | setTotalUsersCountACType
+    | ToggleIsFetchingACType
 export const usersPageReducer = (state: UsersStateType = InitialState, action: ActionTypeUserReducer): UsersStateType => {
-  // debugger
+    // debugger
     switch (action.type) {
         case FOLLOW:
             return {
@@ -64,12 +69,14 @@ export const usersPageReducer = (state: UsersStateType = InitialState, action: A
                 })
             }
         case SET_USERS:
-           // return {...state, users: [...state.users, ...action.users]}
+            // return {...state, users: [...state.users, ...action.users]}
             return {...state, users: action.users}
         case SET_CURRENT_PAGE:
             return {...state, currentPages: action.currentPages}
         case TOTAL_USER_COUNT:
             return {...state, totalUsersCount: action.totalUsersCount}
+        case TOGGLE_IS_FETCHING:
+            return {...state, isFetching: action.isFetching}
         default:
             return state
     }
@@ -106,8 +113,15 @@ export const setTotalUserCountAC = (totalUsersCount: number) => {
         totalUsersCount
     } as const
 }
+export const toggleIsFetchingAC = (isFetching: boolean) => {
+    return {
+        type: TOGGLE_IS_FETCHING,
+        isFetching
+    } as const
+}
 export type FollowACType = ReturnType<typeof followAC>
 export type UnfollowACType = ReturnType<typeof unfollowAC>
 export type setUsersACType = ReturnType<typeof setUsersAC>
 export type setCurrantPageACType = ReturnType<typeof setCurrantPageAC>
 export type setTotalUsersCountACType = ReturnType<typeof setTotalUserCountAC>
+export type ToggleIsFetchingACType = ReturnType<typeof toggleIsFetchingAC>

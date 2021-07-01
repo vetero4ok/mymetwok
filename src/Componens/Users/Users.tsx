@@ -16,7 +16,9 @@ type PropsUsersType = {
 
 }
 export const Users = (props: PropsUsersType) => {
-    let pagesCount = Math.ceil(props.totalUserCount / props.pageSize)
+    //let pagesCount = Math.ceil(props.totalUserCount / props.pageSize)
+   /** Захардкоджено 20 сторінок попередньої загрузки з сервера */
+    let pagesCount = 20;
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
