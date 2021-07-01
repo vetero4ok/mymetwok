@@ -1,46 +1,32 @@
-import React, {MouseEvent} from 'react'
-import s from './Users.module.css';
-import userPhoto from '../../assets/images/user.png';
+import axios from 'axios';
+import React from 'react'
 import {userType} from '../../Redux/usersPageReducer';
+import s from './Users.module.css'
+import userPhoto from '../../assets/images/user.png'
 
 
 type PropsUsersType = {
     users: Array<userType>
-    pageSize: number
-    totalUserCount: number
-    currentPages: number
     follow: (userID: number) => void
     unfollow: (userID: number) => void
-    onPageChanged:(pageNumber: number) =>void
-
-
+    setUsers: (users: Array<userType>) => void
 }
-export const Users = (props: PropsUsersType) => {
-    let pagesCount = Math.ceil(props.totalUserCount / props.pageSize)
-    let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i);
+
+export const Users_functional_old = (props: PropsUsersType) => {
+
+    const getUsers = () => {
+        if (props.users.length === 0) {
+            axios.get('https://social-network.samuraijs.com/api/1.0/users')
+                .then(response => {
+                    props.setUsers(response.data.items)
+                })
+        }
     }
     return (
-
         <div>
-            <div>
-                {
-                    pages.map((p, index) => {
-                        return <span
-                            key={index}
-                            className={props.currentPages === p ? s.selectedPages : ''}
-                            onClick={(e: MouseEvent<HTMLInputElement>) => {
-                                props.onPageChanged(p)
-                            }}
-                        >{p}</span>
-
-                    })}
-
-            </div>
-
+            <button onClick={()=>getUsers()} >Get Users</button>
             {
-               props.users.map(u => <div key={u.id}>
+                props.users.map(u => <div key={u.id}>
                     <span>
                         <div>
                             <img alt="" src={u.photos.small !== null ? u.photos.small : userPhoto}
@@ -68,7 +54,6 @@ export const Users = (props: PropsUsersType) => {
             }
 
         </div>
-
 
     );
 }

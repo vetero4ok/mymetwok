@@ -8,7 +8,8 @@ import {
     unfollowAC,
     userType
 } from '../../Redux/usersPageReducer';
-import UsersOnClass from './UsersOnClass';
+import UsersOnClassApiComponents from './UsersOnClassApiComponents';
+
 
 
 let mapStateToProps = (state: AppStateType) => {
@@ -40,4 +41,4 @@ let mapDispatchToProps = (dispatch: AppDispatch) => {
 
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersOnClass)
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersOnClassApiComponents)
