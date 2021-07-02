@@ -2,6 +2,7 @@ import React, {MouseEvent} from 'react'
 import s from './Users.module.css';
 import userPhoto from '../../assets/images/user.png';
 import {userType} from '../../Redux/usersPageReducer';
+import {NavLink} from 'react-router-dom';
 
 
 type PropsUsersType = {
@@ -11,13 +12,13 @@ type PropsUsersType = {
     currentPages: number
     follow: (userID: number) => void
     unfollow: (userID: number) => void
-    onPageChanged:(pageNumber: number) =>void
+    onPageChanged: (pageNumber: number) => void
 
 
 }
 export const Users = (props: PropsUsersType) => {
     //let pagesCount = Math.ceil(props.totalUserCount / props.pageSize)
-   /** Захардкоджено 20 сторінок попередньої загрузки з сервера */
+    /** Захардкоджено 20 сторінок попередньої загрузки з сервера */
     let pagesCount = 20;
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
@@ -42,11 +43,13 @@ export const Users = (props: PropsUsersType) => {
             </div>
 
             {
-               props.users.map(u => <div key={u.id}>
+                props.users.map(u => <div key={u.id}>
                     <span>
                         <div>
-                            <img alt="" src={u.photos.small !== null ? u.photos.small : userPhoto}
-                                 className={s.userPhoto}/>
+                            <NavLink to={'/profile/id' + u.id}>
+                                <img alt="" src={u.photos.small !== null ? u.photos.small : userPhoto}
+                                     className={s.userPhoto}/>
+                            </NavLink>
                         </div>
                         <div>
                             {u.followed

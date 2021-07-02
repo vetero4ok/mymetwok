@@ -1,4 +1,3 @@
-
 import {addMessageCallbackAC, updateNewMessageTextAC} from '../../Redux/dialogPageReducer';
 import {Dialogs} from './Dialogs';
 import {connect} from 'react-redux';

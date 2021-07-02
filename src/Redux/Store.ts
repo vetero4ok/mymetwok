@@ -134,7 +134,7 @@ export type ActionType = AddPostCallbackActionType | UpdateNewPostTextActionType
         this._callbackSubscriber = observer;
     },
     dispatch(action: ActionType) { // {type: 'ADD-POST-CALLBACK'}
-
+//@ts-ignore
         this._state.profilePage = profilePageReducer(this._state.profilePage,action)
         this._state.dialogPage = dialogPageReducer(this._state.dialogPage,action)
         this._callbackSubscriber();
