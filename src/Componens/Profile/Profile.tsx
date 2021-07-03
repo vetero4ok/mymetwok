@@ -11,7 +11,8 @@ type ProfilePropsType = {
 
 export const Profile = (props: ProfilePropsType) => {
     return (
-        <div className={s.content}> Main content
+        <div className={s.content}>
+               {/*Main content*/}
             <ProfileInfo
                 profile={props.profile}
             />
