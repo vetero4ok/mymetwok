@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
-import {userProfileType} from '../../../Redux/profilePageReducer';
+import {UserProfileType} from '../../../Redux/profilePageReducer';
 import {Preloader} from '../../Common/Preloader/Preloader';
 import youtube from '../../../assets/logos/youtube.png'
 import vk from '../../../assets/logos/vk.svg'
@@ -13,7 +13,7 @@ import github from '../../../assets/logos/github.png'
 
 
 type profileInfoPropsType = {
-    profile: userProfileType | null
+    profile: UserProfileType | null
 }
 
 export const ProfileInfo = (props: profileInfoPropsType) => {

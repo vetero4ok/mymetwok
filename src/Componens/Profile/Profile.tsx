@@ -2,10 +2,11 @@ import React from 'react';
 import s from './Profile.module.css';
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 import {MyPostsContainer} from './Posts/MyPosts/MyPostsContainer';
-import {userProfileType} from '../../Redux/profilePageReducer';
+import { UserProfileType } from '../../Redux/profilePageReducer';
+
 
 type ProfilePropsType = {
-    profile: userProfileType | null
+    profile: UserProfileType | null
 }
 
 

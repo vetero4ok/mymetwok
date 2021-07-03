@@ -10,7 +10,7 @@ let InitialState = {
     profile: null
 
 }
-export type contactsType = {
+export type ContactsType = {
     github: string
     vk: string
     facebook: string
@@ -20,17 +20,17 @@ export type contactsType = {
     youtube: string
     mainLink: string
 }
-export type photosType = {
+export type PhotosType = {
     small: string
     large: string
 }
-export type userProfileType = {
+export type UserProfileType = {
     userId: number
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string
-    contacts: contactsType
-    photos: photosType
+    contacts: ContactsType
+    photos: PhotosType
 
 }
 export type MyPostsDataType = {
@@ -41,7 +41,7 @@ export type MyPostsDataType = {
 export type ProfileStateType = {
     newTextPost: string
     myPostsData: Array<MyPostsDataType>
-    profile: userProfileType | null
+    profile: UserProfileType | null
 }
 type ActionTypeProfileReducer = AddPostCallbackActionType
     | UpdateNewPostTextActionType
@@ -85,7 +85,7 @@ export const updateNewPostTextAC = (newText: string) => {
         newText: newText
     } as const
 }
-export const setUserProfile = (profile: userProfileType) => {
+export const setUserProfile = (profile: UserProfileType) => {
     return {
         type: SET_USER_PROFILE,
         profile

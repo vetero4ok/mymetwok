@@ -12,7 +12,7 @@ export function Dialog(props: propsDialogType) {
     let path = '/dialog/' + props.id
     return (
         <div className={s.dialog}>
-            <img src={props.avatar}/>
+            <img src={props.avatar} alt = {'avatar'}/>
             <NavLink to={path}><div className={s.name} >{props.name}</div></NavLink>
         </div>
     )

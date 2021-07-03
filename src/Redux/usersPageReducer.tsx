@@ -7,7 +7,7 @@ let InitialState = {
 
 
 }
-export type photosType = {
+export type PhotosType = {
     small: string
     large: string
 }
@@ -15,16 +15,16 @@ export type photosType = {
 //     city: string
 //     country: string
 // }
-export type userType = {
+export type UserType = {
     id: number
-    photos: photosType
+    photos: PhotosType
     followed: boolean
     name: string
     status: string
     // location: locationType
 }
 export type UsersStateType = {
-    users: Array<userType>
+    users: Array<UserType>
     pageSize: number
     totalUsersCount: number
     currentPages: number
@@ -95,7 +95,7 @@ export const unfollow = (userID: number) => {
     } as const
 
 }
-export const setUsers = (users: Array<userType>) => {
+export const setUsers = (users: Array<UserType>) => {
     return {
         type: SET_USERS,
         users

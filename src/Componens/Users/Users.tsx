@@ -1,12 +1,12 @@
 import React, {MouseEvent} from 'react'
 import s from './Users.module.css';
 import userPhoto from '../../assets/images/user.png';
-import {userType} from '../../Redux/usersPageReducer';
 import {NavLink} from 'react-router-dom';
+import {UserType} from '../../Redux/usersPageReducer';
 
 
 type PropsUsersType = {
-    users: Array<userType>
+    users: Array<UserType>
     pageSize: number
     totalUserCount: number
     currentPages: number
@@ -46,7 +46,7 @@ export const Users = (props: PropsUsersType) => {
                 props.users.map(u => <div key={u.id}>
                     <span>
                         <div>
-                            <NavLink to={'/profile/id' + u.id}>
+                            <NavLink to={'/profile/' + u.id}>
                                 <img alt="" src={u.photos.small !== null ? u.photos.small : userPhoto}
                                      className={s.userPhoto}/>
                             </NavLink>
