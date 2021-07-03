@@ -1,4 +1,4 @@
-import {connect} from 'react-redux';
+import {connect, ConnectedProps} from 'react-redux';
 import {AppStateType} from '../../Redux/Redux-Store';
 import {
     follow,
@@ -7,28 +7,28 @@ import {
     setUsers,
     toggleIsFetching,
     unfollow,
-    userType
 } from '../../Redux/usersPageReducer';
 import React from 'react';
 import axios from 'axios';
 import {Users} from './Users';
 import {Preloader} from '../Common/Preloader/Preloader';
 
-type PropsUsersType = {
-    users: Array<userType>
-    pageSize: number
-    totalUserCount: number
-    currentPages: number
-    isFetching: boolean
-    follow: (userID: number) => void
-    unfollow: (userID: number) => void
-    setUsers: (users: Array<userType>) => void
-    setCurrantPage: (currentPages: number) => void
-    setTotalUserCount: (totalUsersCount: number) => void
-    toggleIsFetching: (isFetching: boolean) => void
-}
 
-class UsersApiComponents extends React.Component<PropsUsersType> {
+// type PropsUsersType = {
+//     users: Array<userType>
+//     pageSize: number
+//     totalUserCount: number
+//     currentPages: number
+//     isFetching: boolean
+//     follow: (userID: number) => void
+//     unfollow: (userID: number) => void
+//     setUsers: (users: Array<userType>) => void
+//     setCurrantPage: (currentPages: number) => void
+//     setTotalUserCount: (totalUsersCount: number) => void
+//     toggleIsFetching: (isFetching: boolean) => void
+// }
+
+class UsersApiComponents extends React.Component<PropsFromRedux> {
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
@@ -83,16 +83,16 @@ let mapStateToProps = (state: AppStateType) => {
         isFetching: state.usersPage.isFetching
     }
 }
+const connector = connect(mapStateToProps, {
+    follow,
+    unfollow,
+    setUsers,
+    setCurrantPage,
+    setTotalUserCount,
+    toggleIsFetching
+})
+type PropsFromRedux = ConnectedProps<typeof connector>
 
-
-export const UsersContainer = connect(mapStateToProps,
-    {
-        follow,
-        unfollow,
-        setUsers,
-        setCurrantPage,
-        setTotalUserCount,
-        toggleIsFetching
-    })(UsersApiComponents)
+export const UsersContainer = connector(UsersApiComponents)
 
 
