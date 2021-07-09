@@ -1,6 +1,7 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import s from './Navbar.module.css';
+import {BlockFriendsComponents} from './BlockFriends/BlockFriendsApiComponents';
 
 
 export const Navbar = () => {
@@ -27,12 +28,10 @@ export const Navbar = () => {
             <div className={s.item}>
                 <NavLink to="/friends" activeClassName={s.activeLink}>Friends</NavLink>
             </div>
-            {/*<div className={s.blockFriends} >*/}
-            {/*   <BlockFriends friendsData={props.friendsData} />*/}
-            {/*</div>*/}
+            <div className={s.blockFriends}>
+                <BlockFriendsComponents />
+            </div>
         </nav>
-
-
 
 
     );

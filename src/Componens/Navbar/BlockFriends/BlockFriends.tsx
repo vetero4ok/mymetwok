@@ -1,14 +1,14 @@
 import React from 'react';
 import s from './BlockFriends.module.css'
-import {StoreType} from '../../../Redux/Redux-Store';
+import {DialogsDataType} from '../../../Redux/DialogPageReducer';
 
 
 type PropsFriendsType = {
-   store: StoreType
+    dialogsData:Array<DialogsDataType>
 }
 
 export const BlockFriends = (props: PropsFriendsType) => {
-    const friend = props.store.getState().sidebar.friendsData.map(f => {
+    const friend = props.dialogsData.map(f => {
         return (
             <div key={f.id} className={s.items} >
                 <div>
