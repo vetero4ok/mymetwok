@@ -1,7 +1,6 @@
-import {ActionType, DialogPage, MassagesDataType} from './Store';
 import {v1} from 'uuid';
 
-const InitialState = {
+const InitialState: InitDialogPageStateType = {
 
     dialogsData: [
         {
@@ -34,34 +33,53 @@ const InitialState = {
 
     ]
 }
+export type DialogsDataType = {
+    id: string
+    name: string
+    avatar: string
+}
+export type MassagesDataType = {
+    id: string
+    massage: string
+}
+export type InitDialogPageStateType = {
+    newTextMassages: string
+    dialogsData: Array<DialogsDataType>
+    massagesData: Array<MassagesDataType>
+
+}
+export type ActionTypeDialogPageReducer = AddMessageCallbackActionType
+    | UpdateNewMessageTextActionType
 
 
 const ADD_MESSAGE_CALLBACK = 'ADD-MESSAGE-CALLBACK' as const
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT' as const
-export const dialogPageReducer = (state: DialogPage = InitialState, action: ActionType):DialogPage => {
+export const DialogPageReducer =
+    (state = InitialState,
+     action: ActionTypeDialogPageReducer): InitDialogPageStateType => {
 
-    switch (action.type) {
-        case ADD_MESSAGE_CALLBACK: {
-            const newMessage: MassagesDataType = {
-                id: v1(),
-                massage: action.message,
+        switch (action.type) {
+            case ADD_MESSAGE_CALLBACK: {
+                const newMessage: MassagesDataType = {
+                    id: v1(),
+                    massage: action.message,
+                }
+                return {
+                    ...state,
+                    newTextMassages: '',
+                    massagesData: [...state.massagesData, newMessage]
+                }
             }
-            return {
-                ...state,
-                newTextMassages: '',
-                massagesData: [...state.massagesData, newMessage]
-            }
+            case UPDATE_NEW_MESSAGE_TEXT:
+                return {
+                    ...state,
+                    newTextMassages: action.newMessage
+                }
+            default:
+                return state
         }
-        case UPDATE_NEW_MESSAGE_TEXT:
-            return {
-                ...state,
-                newTextMassages: action.newMessage
-            }
-        default:
-            return state
-    }
 
-}
+    }
 export const addMessageCallbackAC = (message: string) => {
     return {
         type: ADD_MESSAGE_CALLBACK,

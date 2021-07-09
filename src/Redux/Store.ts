@@ -1,5 +1,5 @@
 import {v1} from 'uuid';
-import {AddMessageCallbackActionType, dialogPageReducer, UpdateNewMessageTextActionType} from './dialogPageReducer';
+import { DialogPageReducer } from './DialogPageReducer';
 import {AddPostCallbackActionType, profilePageReducer, UpdateNewPostTextActionType} from './profilePageReducer';
 import {FollowACType, setUsersACType, UnfollowACType} from './usersPageReducer';
 
@@ -13,16 +13,16 @@ export type ProfilePage = {
     newTextPost: string
     myPostsData: Array<MyPostsDataType>,
 }
-export type DialogsDataType = {
+type DialogsDataType = {
     id: string
     name: string
     avatar: string
 }
-export type MassagesDataType = {
+type MassagesDataType = {
     id: string
     massage: string
 }
-export type DialogPage = {
+type DialogPage = {
     newTextMassages: string
     dialogsData: Array<DialogsDataType>
     massagesData: Array<MassagesDataType>
@@ -42,7 +42,7 @@ export type RootStateType = {
 
 }
 export type ActionType = AddPostCallbackActionType | UpdateNewPostTextActionType
-    | AddMessageCallbackActionType | UpdateNewMessageTextActionType |FollowACType|UnfollowACType|setUsersACType
+    |FollowACType|UnfollowACType|setUsersACType
 
  type StoreType = {
     _state: RootStateType
@@ -136,7 +136,8 @@ export type ActionType = AddPostCallbackActionType | UpdateNewPostTextActionType
     dispatch(action: ActionType) { // {type: 'ADD-POST-CALLBACK'}
 //@ts-ignore
         this._state.profilePage = profilePageReducer(this._state.profilePage,action)
-        this._state.dialogPage = dialogPageReducer(this._state.dialogPage,action)
+//@ts-ignore
+        this._state.dialogPage = DialogPageReducer(this._state.dialogPage,action)
         this._callbackSubscriber();
 
     }

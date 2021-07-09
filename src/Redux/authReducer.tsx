@@ -1,7 +1,7 @@
 let InitialState: InitAuthStateType = {
     /** заглушка надо придумать как загружать данные
      * userId: 17817, login: '',  email: '',*/
-    userId: 2,
+    userId: 17817,
     login: '',
     email: '',
     isAuth: false,

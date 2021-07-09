@@ -5,10 +5,11 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import {News} from './Componens/News/News';
 import {Music} from './Componens/Music/Music';
 import {Settings} from './Componens/Settings/Settings';
-import {DialogsContainer} from './Componens/Dialogs/DialogsContainer';
 import {UsersContainer} from './Componens/Users/UsersContainer';
 import {ProfileContainer} from './Componens/Profile/ProfileContainer';
 import {HeaderContainer} from './Componens/Header/HeaderContainer';
+import { DialogsContainer } from './Componens/Dialogs/DialogsContainer';
+
 
 
 

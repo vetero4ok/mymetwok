@@ -1,8 +1,9 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './Dialogs.module.css'
-import {Dialog} from './DialogsItems/DialogsItem';
 import {Message} from './Message/Message';
-import {DialogsDataType, MassagesDataType} from '../../Redux/Store';
+import {DialogsDataType, MassagesDataType} from '../../Redux/DialogPageReducer';
+import {Dialog} from './DialogsItems/DialogsItem';
+
 
 
 type propsDialogsType = {

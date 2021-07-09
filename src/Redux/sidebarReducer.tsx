@@ -1,6 +1,7 @@
 import {v1} from 'uuid';
 import {ActionType, SidebarType} from './Store';
 
+
 let InitialState = {
     friendsData: [
         {
