@@ -13,12 +13,20 @@ type PathParamType = {
 type PropsType = RouteComponentProps<PathParamType> & {
     profile: UserProfileType | null
     setUserProfile: (data: UserProfileType) => void
+    userId: number
 }
 
 class ProfileApiComponents extends React.Component<PropsType> {
     componentDidMount() {
         let userId = this.props.match.params.userId;
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId )
+        /** Перевірка якщо в аресній строці нема id(undefined | null) то id беремо з authReducer і добавляємо до
+         * профайла в кінець адресної строки, а переводимо в строку тому, що значенння з PathParamType
+         * завжди повертає строку*/
+        if(!userId) {
+            userId = this.props.userId.toString()
+        }
+
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
             .then(response => {
                 this.props.setUserProfile(response.data)
             })
@@ -37,7 +45,8 @@ class ProfileApiComponents extends React.Component<PropsType> {
 }
 
 let mapStateToProps = (state: AppStateType) => ({
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
+    userId: state.auth.userId
 })
 
 

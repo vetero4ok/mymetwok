@@ -3,6 +3,7 @@ import {profilePageReducer} from './profilePageReducer';
 import {dialogPageReducer} from './dialogPageReducer';
 import {sidebarReducer} from './sidebarReducer';
 import { usersPageReducer } from './usersPageReducer';
+import {authUserReducer} from './authReducer';
 
 
 let rootReducer =  combineReducers({
@@ -10,6 +11,7 @@ let rootReducer =  combineReducers({
     dialogPage:dialogPageReducer,
     sidebar:sidebarReducer,
     usersPage:usersPageReducer,
+    auth:authUserReducer,
 })
 
 export let store =  createStore(rootReducer);
