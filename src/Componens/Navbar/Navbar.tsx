@@ -24,9 +24,9 @@ export const Navbar = () => {
             <div className={s.item}>
                 <NavLink to="/users" activeClassName={s.activeLink}>Users</NavLink>
             </div>
-            {/*<div className={s.item}>*/}
-            {/*    <NavLink to="/friends" activeClassName={s.activeLink}>Friends</NavLink>*/}
-            {/*</div>*/}
+            <div className={s.item}>
+                <NavLink to="/friends" activeClassName={s.activeLink}>Friends</NavLink>
+            </div>
             {/*<div className={s.blockFriends} >*/}
             {/*   <BlockFriends friendsData={props.friendsData} />*/}
             {/*</div>*/}

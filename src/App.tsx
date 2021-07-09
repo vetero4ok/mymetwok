@@ -9,6 +9,7 @@ import {UsersContainer} from './Componens/Users/UsersContainer';
 import {ProfileContainer} from './Componens/Profile/ProfileContainer';
 import {HeaderContainer} from './Componens/Header/HeaderContainer';
 import { DialogsContainer } from './Componens/Dialogs/DialogsContainer';
+import {FriendsContainer} from './Componens/Friends/FriendsContainer';
 
 
 
@@ -28,7 +29,7 @@ function App() {
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>
                     <Route path="/users" render={() => <UsersContainer/>}/>
-                    {/*<Route path="/friends" render={() => <Friends/>}/>*/}
+                    <Route path="/friends" render={() => <FriendsContainer/>}/>
 
 
                 </div>

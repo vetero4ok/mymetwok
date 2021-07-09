@@ -1,16 +1,14 @@
 import React from 'react';
 import s from './Friends.module.css';
-import {StoreType} from '../../Redux/Redux-Store';
-
-
+import {DialogsDataType} from '../../Redux/DialogPageReducer';
 
 type PropsFriendsType = {
- store: StoreType
+    dialogsData:Array<DialogsDataType>
 }
 
 export const Friends = (props:PropsFriendsType) => {
 
-    const friend = props.store.getState().sidebar.friendsData.map(f=>{
+    const friend = props.dialogsData.map(f=>{
         return(
         <div key={f.id}>
             <div>
@@ -21,8 +19,6 @@ export const Friends = (props:PropsFriendsType) => {
 
         )
     })
-
-
 
     return (
         <div className={s.mane} >
