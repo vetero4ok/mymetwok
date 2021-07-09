@@ -5,12 +5,19 @@
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    background:grey;
+    background: grey;
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .header img {
     width: 80px;
     height: 40px;
+}
+
+.loginBlock {
+    width: 30%;
+    display: flex;
 }
