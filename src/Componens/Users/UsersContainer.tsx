@@ -9,9 +9,9 @@ import {
     unfollow, UserType
 } from '../../Redux/usersPageReducer';
 import React from 'react';
-import axios from 'axios';
 import {Users} from './Users';
 import {Preloader} from '../Common/Preloader/Preloader';
+import {getUsers} from '../Api/Api';
 
 
 type PropsUsersType = {
@@ -32,25 +32,21 @@ class UsersApiComponents extends React.Component<PropsUsersType> {
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPages}&count=${this.props.pageSize}`, {
-            withCredentials: true,
-        })
-            .then(response => {
+        getUsers(this.props.currentPages, this.props.pageSize)
+            .then(data => {
                 this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUserCount(response.data.totalCount)
+                this.props.setUsers(data.items)
+                this.props.setTotalUserCount(data.totalCount)
             })
     }
 
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrantPage(pageNumber)
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
-            withCredentials: true,
-        })
-            .then(response => {
+        getUsers(pageNumber, this.props.pageSize)
+            .then(data => {
                 this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items)
+                this.props.setUsers(data.items)
 
             })
     }
@@ -59,7 +55,6 @@ class UsersApiComponents extends React.Component<PropsUsersType> {
         return (
             <>
                 {this.props.isFetching
-                    //   ? <img src={preloader} style={{width: '30px', height: '30px'}} alt={'loaders'}/>
                     ? <Preloader/>
                     : null}
                 <Users
