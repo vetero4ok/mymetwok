@@ -5,7 +5,7 @@ import {AppStateType} from '../../Redux/Redux-Store';
 import {connect} from 'react-redux';
 import {RouteComponentProps} from 'react-router';
 import {withRouter} from 'react-router-dom';
-import {getProfiles} from '../Api/Api';
+import {profileAPI,} from '../Api/Api';
 
 type PathParamType = {
     userId: string
@@ -25,7 +25,7 @@ class ProfileApiComponents extends React.Component<PropsType> {
             userId = this.props.userId
         }
 
-        getProfiles(userId)
+        profileAPI.getProfiles(userId)
             .then(response => {
                 this.props.setUserProfile(response.data)
             })

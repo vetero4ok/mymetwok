@@ -3,8 +3,7 @@ import s from './Users.module.css';
 import userPhoto from '../../assets/images/user.png';
 import {NavLink} from 'react-router-dom';
 import {UserType} from '../../Redux/usersPageReducer';
-import axios from 'axios';
-import {followUser, unfollowUser} from '../Api/Api';
+import {followAPI} from '../Api/Api';
 
 
 type PropsUsersType = {
@@ -56,7 +55,7 @@ export const Users = (props: PropsUsersType) => {
                         <div>
                             {u.followed
                                 ? <button onClick={() => {
-                                    unfollowUser(u.id)
+                                    followAPI.unfollowUser(u.id)
                                         .then(response => {
                                             if (response.data.resultCode === 0) {
                                                 props.unfollow(u.id)
@@ -64,7 +63,7 @@ export const Users = (props: PropsUsersType) => {
                                         })
                                 }}>Unfollow</button>
                                 : <button onClick={() => {
-                                    followUser(u.id)
+                                    followAPI.followUser(u.id)
                                         .then(response => {
                                             if (response.data.resultCode === 0) {
                                                 props.follow(u.id)
