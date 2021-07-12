@@ -9,7 +9,7 @@ export function getUsers(currentPages: number, pageSize: number) {
     })
 }
 
-export function getProfiles(userId:string) {
+export function getProfiles(userId:number) {
   return   axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
 
 }
@@ -32,4 +32,9 @@ export function unfollowUser(userId:number) {
             }
         })
 
+}
+export function authMe() {
+   return  axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
+        withCredentials: true
+    })
 }

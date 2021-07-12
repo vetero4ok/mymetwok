@@ -18,12 +18,11 @@ type PropsType = RouteComponentProps<PathParamType> & {
 
 class ProfileApiComponents extends React.Component<PropsType> {
     componentDidMount() {
-        let userId = this.props.match.params.userId;
+        let userId = +this.props.match.params.userId;
         /** Перевірка якщо в аресній строці нема id(undefined | null) то id беремо з authReducer і добавляємо до
-         * профайла в кінець адресної строки, а переводимо в строку тому, що значенння з PathParamType
-         * завжди повертає строку*/
+         * профайла в кінець адресної строки, а  в PathParamType  userId: string тому неявно переводимо строку в число*/
         if (!userId) {
-            userId = this.props.userId.toString()
+            userId = this.props.userId
         }
 
         getProfiles(userId)

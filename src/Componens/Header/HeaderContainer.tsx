@@ -3,9 +3,9 @@ import {Header} from './Header';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../Redux/Redux-Store';
 import {setUserAuthData} from '../../Redux/authReducer';
-import axios from 'axios';
 import {toggleIsFetching} from '../../Redux/usersPageReducer';
 import {setUserProfile, UserProfileType} from '../../Redux/profilePageReducer';
+import {authMe, getProfiles} from '../Api/Api';
 
 type PropsHeaderComponentType = {
     isAuth: boolean
@@ -22,23 +22,20 @@ class HeaderApiContainer extends React.Component<PropsHeaderComponentType> {
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-            withCredentials: true
+        authMe().then(response => {
+            if (response.data.resultCode === 0) {
+                let {id, email, login} = response.data.data
+                this.props.setUserAuthData(id, email, login, true)
+               // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${this.props.userId}`)
+                getProfiles(this.props.userId)
+                    .then(response => {
+                        this.props.setUserProfile(response.data)
+                    })
+                this.props.toggleIsFetching(false)
+            }
+
+
         })
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    let {id, email, login} = response.data.data
-                    //  debugger
-                    this.props.setUserAuthData(id, email, login, true)
-                    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${this.props.userId}`)
-                        .then(response => {
-                            this.props.setUserProfile(response.data)
-                        })
-                    this.props.toggleIsFetching(false)
-                }
-
-
-            })
     }
 
     render() {
