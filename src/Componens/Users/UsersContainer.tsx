@@ -20,14 +20,14 @@ type PropsUsersType = {
     totalUserCount: number
     currentPages: number
     isFetching: boolean
-    inProcess:boolean
+    followingInProcess:Array<number>
     follow: (userID: number) => void
     unfollow: (userID: number) => void
     setUsers: (users: Array<UserType>) => void
     setCurrantPage: (currentPages: number) => void
     setTotalUserCount: (totalUsersCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
-    toggleInProcess :(toggleInProcess: boolean) => void
+    toggleInProcess :(toggleInProcess: boolean,userID:number) => void
 }
 
 class UsersApiComponents extends React.Component<PropsUsersType> {
@@ -67,7 +67,7 @@ class UsersApiComponents extends React.Component<PropsUsersType> {
                     unfollow={this.props.unfollow}
                     currentPages={this.props.currentPages}
                     onPageChanged={this.onPageChanged}
-                    inProcess={this.props.inProcess}
+                    followingInProcess={this.props.followingInProcess}
                     toggleInProcess={this.props.toggleInProcess}
 
 
@@ -86,7 +86,7 @@ let mapStateToProps = (state: AppStateType) => {
         totalUserCount: state.usersPage.totalUsersCount,
         currentPages: state.usersPage.currentPages,
         isFetching: state.usersPage.isFetching,
-        inProcess: state.usersPage.inProcess
+        followingInProcess: state.usersPage.followingInProcess
     }
 }
 

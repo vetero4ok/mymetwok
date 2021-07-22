@@ -4,9 +4,7 @@ let InitialState = {
     totalUsersCount: 0,
     currentPages: 1,
     isFetching: false,
-    inProcess: false
-
-
+    followingInProcess: []
 }
 
 export type PhotosType = {
@@ -31,8 +29,7 @@ export type UsersStateType = {
     totalUsersCount: number
     currentPages: number
     isFetching: boolean
-    inProcess: boolean
-
+    followingInProcess: Array<number>
 }
 
 const FOLLOW = 'FOLLOW' as const
@@ -85,7 +82,10 @@ export const usersPageReducer = (state: UsersStateType = InitialState, action: A
         case TOGGLE_IN_PROCESS:
             return {
                 ...state,
-                inProcess: action.toggleInProcess
+                followingInProcess: action.followingInProcess
+                    ? [...state.followingInProcess, action.userID]
+                    : state.followingInProcess.filter(id=>id !== action.userID)
+
             }
         default:
             return state
@@ -129,10 +129,11 @@ export const toggleIsFetching = (isFetching: boolean) => {
         isFetching
     } as const
 }
-export const toggleInProcess = (toggleInProcess: boolean) => {
+export const toggleInProcess = (followingInProcess: boolean, userID:number) => {
     return {
         type: TOGGLE_IN_PROCESS,
-        toggleInProcess,
+        followingInProcess,
+        userID,
     } as const
 }
 export type FollowACType = ReturnType<typeof follow>

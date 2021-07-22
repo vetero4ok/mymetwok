@@ -14,8 +14,8 @@ type PropsUsersType = {
     follow: (userID: number) => void
     unfollow: (userID: number) => void
     onPageChanged: (pageNumber: number) => void
-    inProcess: boolean
-    toggleInProcess: (toggleInProcess: boolean) => void
+    followingInProcess: Array<number>
+    toggleInProcess: (toggleInProcess: boolean,userID:number) => void
 
 
 }
@@ -57,28 +57,28 @@ export const Users = (props: PropsUsersType) => {
                         <div>
                             {u.followed
                                 ? <button
-                                    disabled={props.inProcess}
+                                    disabled={props.followingInProcess.some(id => id === u.id)}
                                     onClick={() => {
-                                        props.toggleInProcess(true)
+                                        props.toggleInProcess(true,u.id)
                                         followAPI.unfollowUser(u.id)
                                             .then(response => {
                                                 if (response.data.resultCode === 0) {
                                                     props.unfollow(u.id)
                                                 }
-                                                props.toggleInProcess(false)
+                                                props.toggleInProcess(false, u.id)
                                             })
                                     }}>Unfollow</button>
 
                                 : <button
-                                    disabled={props.inProcess}
+                                    disabled={props.followingInProcess.some(id => id === u.id)}
                                     onClick={() => {
-                                        props.toggleInProcess(true)
+                                        props.toggleInProcess(true,u.id)
                                         followAPI.followUser(u.id)
                                             .then(response => {
                                                 if (response.data.resultCode === 0) {
                                                     props.follow(u.id)
                                                 }
-                                                props.toggleInProcess(false)
+                                                props.toggleInProcess(false, u.id)
                                             })
                                     }}>Follow</button>}
 
