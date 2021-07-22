@@ -1,4 +1,6 @@
 import {v1} from 'uuid';
+import {AppDispatch} from './Redux-Store';
+import {profileAPI} from '../Api/Api';
 
 let InitialState = {
     newTextPost: '',
@@ -94,3 +96,11 @@ export const setUserProfile = (profile: UserProfileType) => {
 export type AddPostCallbackActionType = ReturnType<typeof addPostCallbackAC>
 export type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextAC>
 export type setUserProfileActionType = ReturnType<typeof setUserProfile>
+
+export const setProfilePage = (userId: number) => {
+    return (dispatch: AppDispatch) => {
+        profileAPI.getProfiles(userId).then(response => {
+            dispatch(setUserProfile(response.data));
+        })
+    }
+}

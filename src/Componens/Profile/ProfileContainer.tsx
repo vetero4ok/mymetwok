@@ -1,18 +1,18 @@
 import React from 'react';
 import {Profile} from './Profile';
-import {setUserProfile, UserProfileType} from '../../Redux/profilePageReducer';
+import {setProfilePage,  UserProfileType} from '../../Redux/profilePageReducer';
 import {AppStateType} from '../../Redux/Redux-Store';
 import {connect} from 'react-redux';
 import {RouteComponentProps} from 'react-router';
 import {withRouter} from 'react-router-dom';
-import {profileAPI,} from '../../Api/Api';
+
 
 type PathParamType = {
     userId: string
 }
 type PropsType = RouteComponentProps<PathParamType> & {
     profile: UserProfileType | null
-    setUserProfile: (data: UserProfileType) => void
+    setProfilePage: (userId: number) => void
     userId: number
 }
 
@@ -24,11 +24,8 @@ class ProfileApiComponents extends React.Component<PropsType> {
         if (!userId) {
             userId = this.props.userId
         }
+        this.props.setProfilePage(userId)
 
-        profileAPI.getProfiles(userId)
-            .then(response => {
-                this.props.setUserProfile(response.data)
-            })
     }
 
     render() {
@@ -52,4 +49,6 @@ let mapStateToProps = (state: AppStateType) => ({
 let WithUrlDataContainerComponents = withRouter(ProfileApiComponents)
 
 
-export const ProfileContainer = connect(mapStateToProps, {setUserProfile})(WithUrlDataContainerComponents)
+export const ProfileContainer = connect(mapStateToProps, {
+     setProfilePage,
+})(WithUrlDataContainerComponents)
