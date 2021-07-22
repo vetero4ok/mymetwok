@@ -1,3 +1,6 @@
+import {userAPI} from '../Api/Api';
+import {AppDispatch} from './Redux-Store';
+
 let InitialState = {
     users: [],
     pageSize: 5,
@@ -143,3 +146,15 @@ export type setCurrantPageACType = ReturnType<typeof setCurrantPage>
 export type setTotalUsersCountACType = ReturnType<typeof setTotalUserCount>
 export type ToggleIsFetchingACType = ReturnType<typeof toggleIsFetching>
 export type ToggleInProcessACType = ReturnType<typeof toggleInProcess>
+
+export const getUsers = (currentPages:number, pageSize:number) => {
+    return (dispatch:AppDispatch) => {
+        dispatch(toggleIsFetching(true));
+    userAPI.getUsers(currentPages, pageSize)
+        .then(data => {
+            dispatch(toggleIsFetching(false));
+            dispatch(setUsers(data.items));
+            dispatch(setTotalUserCount(data.totalCount));
+        })
+    }
+}
