@@ -5,7 +5,7 @@ import {AppStateType} from '../../Redux/Redux-Store';
 import {connect} from 'react-redux';
 import {RouteComponentProps} from 'react-router';
 import {withRouter} from 'react-router-dom';
-import {profileAPI,} from '../Api/Api';
+import {profileAPI,} from '../../Api/Api';
 
 type PathParamType = {
     userId: string

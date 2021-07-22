@@ -4,14 +4,14 @@ import {
     follow,
     setCurrantPage,
     setTotalUserCount,
-    setUsers,
+    setUsers, toggleInProcess,
     toggleIsFetching,
     unfollow, UserType
 } from '../../Redux/usersPageReducer';
 import React from 'react';
 import {Users} from './Users';
 import {Preloader} from '../Common/Preloader/Preloader';
-import {userAPI} from '../Api/Api';
+import {userAPI} from '../../Api/Api';
 
 
 type PropsUsersType = {
@@ -20,12 +20,14 @@ type PropsUsersType = {
     totalUserCount: number
     currentPages: number
     isFetching: boolean
+    inProcess:boolean
     follow: (userID: number) => void
     unfollow: (userID: number) => void
     setUsers: (users: Array<UserType>) => void
     setCurrantPage: (currentPages: number) => void
     setTotalUserCount: (totalUsersCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
+    toggleInProcess :(toggleInProcess: boolean) => void
 }
 
 class UsersApiComponents extends React.Component<PropsUsersType> {
@@ -65,6 +67,10 @@ class UsersApiComponents extends React.Component<PropsUsersType> {
                     unfollow={this.props.unfollow}
                     currentPages={this.props.currentPages}
                     onPageChanged={this.onPageChanged}
+                    inProcess={this.props.inProcess}
+                    toggleInProcess={this.props.toggleInProcess}
+
+
 
                 />
             </>
@@ -79,7 +85,8 @@ let mapStateToProps = (state: AppStateType) => {
         pageSize: state.usersPage.pageSize,
         totalUserCount: state.usersPage.totalUsersCount,
         currentPages: state.usersPage.currentPages,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        inProcess: state.usersPage.inProcess
     }
 }
 
@@ -90,7 +97,8 @@ export const UsersContainer = connect(mapStateToProps, {
     setUsers,
     setCurrantPage,
     setTotalUserCount,
-    toggleIsFetching
+    toggleIsFetching,
+    toggleInProcess,
 })(UsersApiComponents)
 
 

@@ -4,9 +4,11 @@ let InitialState = {
     totalUsersCount: 0,
     currentPages: 1,
     isFetching: false,
+    inProcess: false
 
 
 }
+
 export type PhotosType = {
     small: string
     large: string
@@ -29,6 +31,7 @@ export type UsersStateType = {
     totalUsersCount: number
     currentPages: number
     isFetching: boolean
+    inProcess: boolean
 
 }
 
@@ -38,6 +41,7 @@ const SET_USERS = 'SET-USERS' as const
 const SET_CURRENT_PAGE = 'SET-CURRENT_PAGE' as const
 const TOTAL_USER_COUNT = 'TOTAL-USER-COUNT' as const
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING' as const
+const TOGGLE_IN_PROCESS = 'TOGGLE-IN-PROCESS' as const
 
 export type ActionTypeUserReducer = FollowACType
     | UnfollowACType
@@ -45,6 +49,7 @@ export type ActionTypeUserReducer = FollowACType
     | setCurrantPageACType
     | setTotalUsersCountACType
     | ToggleIsFetchingACType
+    | ToggleInProcessACType
 export const usersPageReducer = (state: UsersStateType = InitialState, action: ActionTypeUserReducer): UsersStateType => {
     // debugger
     switch (action.type) {
@@ -77,6 +82,11 @@ export const usersPageReducer = (state: UsersStateType = InitialState, action: A
             return {...state, totalUsersCount: action.totalUsersCount}
         case TOGGLE_IS_FETCHING:
             return {...state, isFetching: action.isFetching}
+        case TOGGLE_IN_PROCESS:
+            return {
+                ...state,
+                inProcess: action.toggleInProcess
+            }
         default:
             return state
     }
@@ -119,9 +129,16 @@ export const toggleIsFetching = (isFetching: boolean) => {
         isFetching
     } as const
 }
+export const toggleInProcess = (toggleInProcess: boolean) => {
+    return {
+        type: TOGGLE_IN_PROCESS,
+        toggleInProcess,
+    } as const
+}
 export type FollowACType = ReturnType<typeof follow>
 export type UnfollowACType = ReturnType<typeof unfollow>
 export type setUsersACType = ReturnType<typeof setUsers>
 export type setCurrantPageACType = ReturnType<typeof setCurrantPage>
 export type setTotalUsersCountACType = ReturnType<typeof setTotalUserCount>
 export type ToggleIsFetchingACType = ReturnType<typeof toggleIsFetching>
+export type ToggleInProcessACType = ReturnType<typeof toggleInProcess>

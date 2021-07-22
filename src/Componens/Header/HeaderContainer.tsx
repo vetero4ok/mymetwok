@@ -5,7 +5,7 @@ import {AppStateType} from '../../Redux/Redux-Store';
 import {setUserAuthData} from '../../Redux/authReducer';
 import {toggleIsFetching} from '../../Redux/usersPageReducer';
 import {setUserProfile, UserProfileType} from '../../Redux/profilePageReducer';
-import {authMeAPI, profileAPI,} from '../Api/Api';
+import {authMeAPI, profileAPI,} from '../../Api/Api';
 
 type PropsHeaderComponentType = {
     isAuth: boolean
