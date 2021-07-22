@@ -1,4 +1,4 @@
-import {followAPI, userAPI} from '../Api/Api';
+import {userAPI} from '../Api/Api';
 import {AppDispatch} from './Redux-Store';
 
 let InitialState = {
@@ -162,7 +162,7 @@ export const getUsers = (currentPages: number, pageSize: number) => {
 export const follow = (userID: number) => {
     return (dispatch: AppDispatch) => {
         dispatch(toggleInProcess(true, userID));
-        followAPI.followUser(userID)
+        userAPI.followUser(userID)
             .then(response => {
                 if (response.data.resultCode === 0) {
                     dispatch(followSuccess(userID));
@@ -175,7 +175,7 @@ export const follow = (userID: number) => {
 export const unfollow = (userID: number) => {
     return (dispatch: AppDispatch) => {
         dispatch(toggleInProcess(true, userID));
-        followAPI.unfollowUser(userID)
+        userAPI.unfollowUser(userID)
             .then(response => {
                 if (response.data.resultCode === 0) {
                     dispatch(unfollowSuccess(userID));

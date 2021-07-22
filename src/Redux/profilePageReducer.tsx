@@ -99,7 +99,7 @@ export type setUserProfileActionType = ReturnType<typeof setUserProfile>
 
 export const setProfilePage = (userId: number) => {
     return (dispatch: AppDispatch) => {
-        profileAPI.getProfiles(userId).then(response => {
+        profileAPI.getProfile(userId).then(response => {
             dispatch(setUserProfile(response.data));
         })
     }

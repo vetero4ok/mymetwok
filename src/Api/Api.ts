@@ -15,13 +15,6 @@ export const userAPI = {
                 return response.data
             })
     },
-}
-export const profileAPI = {
-    getProfiles(userId: number) {
-        return instance.get(`profile/${userId}`)
-    },
-}
-export const followAPI = {
     followUser(userId:number) {
         return instance.post(`follow/${userId}`)
     },
@@ -29,6 +22,12 @@ export const followAPI = {
         return  instance.delete(`follow/${userId}`)
     },
 }
+export const profileAPI = {
+    getProfile(userId: number) {
+        return instance.get(`profile/${userId}`)
+    },
+}
+
 export const authMeAPI = {
     authMe() {
         return  instance.get(`auth/me`)
