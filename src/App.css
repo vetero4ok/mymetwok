@@ -1,4 +1,9 @@
 .app-wrapper {
+    background: #f0f0ed;
+    color: #999;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
     display: grid;
 
     grid-template-areas:
@@ -12,6 +17,6 @@
 .app-wrapper-content{
 
     grid-area: c;
-    background: rgb(215, 239, 239);
+    background: rgb(181, 226, 226);
 
 }
