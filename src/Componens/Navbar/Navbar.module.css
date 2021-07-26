@@ -1,16 +1,23 @@
 .sidebar {
     grid-area: n;
-    background: rgb(201, 255, 238);
+    color: #33363c;
+    border: 1px solid #efefef;
+    box-sizing: border-box;
+    border-radius: 4px;
+    background: #fff;
     padding: 20px;
 
 }
+
 .item a {
-   color: dimgrey;
+    color: #33363c;
     text-decoration: none;
 }
+
 .item a.activeLink {
     color: dodgerblue;
 }
+
 .blockFriends {
     width: 100px;
     display: flex;

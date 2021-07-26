@@ -22,7 +22,7 @@ export const Friends = (props:PropsFriendsType) => {
 
     return (
         <div className={s.mane} >
-            <h1>Friends</h1>
+            <h2>Friends</h2>
             <div className={s.friends}>
                 {friend}
             </div>

@@ -2,7 +2,7 @@
 .header {
     grid-area: h;
     position: relative;
-    width: 100%;
+    width: auto;
     padding: 10px;
     margin-bottom: 10px;
     background: #33363c;
