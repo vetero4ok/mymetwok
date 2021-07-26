@@ -5,6 +5,7 @@ import {NavLink} from 'react-router-dom';
 import {UserProfileType} from '../../Redux/profilePageReducer';
 import {Preloader} from '../Common/Preloader/Preloader';
 import logo_header from '../../assets/logos/logo_header.png'
+import SuperButton from '../Common/Button/SuperButton';
 
 type ProsHeaderType = {
     isAuth: boolean
@@ -36,7 +37,9 @@ export const Header = (props: ProsHeaderType) => {
                 </div>
                 :
                 <NavLink to={'/login'}>
-                    <button>Login</button>
+                    <SuperButton >
+                        Login
+                    </SuperButton>
                 </NavLink>}
 
 
