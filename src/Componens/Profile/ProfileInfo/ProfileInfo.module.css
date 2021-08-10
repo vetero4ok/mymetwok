@@ -1,9 +1,9 @@
-.mydate {
+.myInfo {
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-gap: 1em;
-    background: #F5F7FA;
-}
+    background: #b5c6de;
+    }
 .logos {
     width: 20px;
     height: 20px;

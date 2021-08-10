@@ -21,7 +21,7 @@ export const ProfileInfo = (props: profileInfoPropsType) => {
         return <Preloader/>
     }
     return (
-        <div className={s.mydate}>
+        <div className={s.myInfo}>
             <div>
                 <img src={props.profile.photos.large} alt={'avatar'}/>
             </div>
