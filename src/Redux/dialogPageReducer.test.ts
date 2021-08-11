@@ -52,8 +52,9 @@ test('correct message should be added to up list', () => {
 
 const state = dialogPageReducer(startState,addMessageCallbackAC('new message'))
 
-    expect(state.massagesData[0].massage).toBe('new message')
-    expect(state.massagesData[0].id).toBeDefined()
+    expect(state.massagesData[4].massage).toBe('new message')
+    expect(state.massagesData[4].id).toBeDefined()
+    expect(state.massagesData.length).toBe(5)
 
 })
 

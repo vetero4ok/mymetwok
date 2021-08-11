@@ -67,7 +67,7 @@ export const dialogPageReducer =
                 return {
                     ...state,
                     newTextMassages: '',
-                    massagesData: [newMessage,...state.massagesData]
+                    massagesData: [...state.massagesData,newMessage]
                 }
             }
             case UPDATE_NEW_MESSAGE_TEXT:
