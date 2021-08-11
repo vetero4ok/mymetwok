@@ -64,7 +64,7 @@ export const profilePageReducer = (state: ProfileStateType = InitialState, actio
             }
             return {
                 ...state,
-                myPostsData: [...state.myPostsData, newPost]
+                myPostsData: [newPost,...state.myPostsData]
             }
         }
         case UPDATE_NEW_POST_TEXT:
