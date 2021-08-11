@@ -1,15 +1,16 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './MyPosts.module.css';
 import {Posts} from './Post/Posts';
-import {  MyPostsDataType, } from '../../../../Redux/Store';
-
+import {MyPostsDataType,} from '../../../../Redux/Store';
+import SuperButton from '../../../Common/Button/SuperButton';
+import SuperInputText from '../../../Common/SuperInput/SuperInputText';
 
 
 type propsMyPostType = {
     myPostsData: Array<MyPostsDataType>
     newTextPost: string
-    addPostCallback:(newPost:string) =>void
-    updateNewPostText:(text:string) => void
+    addPostCallback: (newPost: string) => void
+    updateNewPostText: (text: string) => void
 }
 
 
@@ -52,15 +53,18 @@ export const MyPosts = (props: propsMyPostType) => {
             </div>
 
             <div>
-                    <textarea
-                        value={props.newTextPost}
-                        onChange={updateNewPostText}
-                        onKeyPress={onChangeKeyPress}
+                {/*<SuperInputText*/}
+                {/*    */}
+                {/*/>*/}
+                <textarea
+                    value={props.newTextPost}
+                    onChange={updateNewPostText}
+                    onKeyPress={onChangeKeyPress}
 
-                    />
+                />
             </div>
             <div>
-                <button onClick={addPostCallback}>send</button>
+                <SuperButton onClick={addPostCallback}>send</SuperButton>
             </div>
 
             <div>

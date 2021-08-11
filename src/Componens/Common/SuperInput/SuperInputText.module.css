@@ -1,0 +1,42 @@
+.superInput {
+    border-radius: 5px;
+
+}
+
+.errorInput {
+    font-size: 14px;
+    padding: 10px;
+    display: block;
+    width: 200px;
+    height: 10px;
+    border: 1px solid #fa0000;
+    background: #d7d7d7;
+    outline: none;
+
+}
+
+.error {
+    color: red;
+
+
+}
+
+.inputBar {
+    font-size: 14px;
+    padding: 10px;
+    display: block;
+    width: 200px;
+    height: 10px;
+    outline: none;
+
+}
+
+.inputBar:focus {
+    border: 2px solid #555;
+    background-color: #d7d7d7;
+}
+
+.inputBar::placeholder {
+    color: #5e5e5e;
+    font-size: 12px;
+}
