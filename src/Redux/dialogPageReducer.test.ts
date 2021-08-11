@@ -6,8 +6,12 @@ import {
     updateNewMessageTextAC
 } from './dialogPageReducer';
 
-let startState: InitDialogPageStateType
-
+let startState:InitDialogPageStateType
+//type StartState = typeof startState
+/**
+ В идеале хотелось бы так типизировать, что бы смена инициализационного стейта не несло ошибку в тестах,
+ либо будет необходимость сначала писать тесты на редюсер, а потом другую логику. (Вопросик к ментору)
+ */
 beforeEach(() => {
     startState = {
 
