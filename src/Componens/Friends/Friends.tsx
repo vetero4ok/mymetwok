@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './Friends.module.css';
-import {DialogsDataType} from '../../Redux/DialogPageReducer';
+import {DialogsDataType} from '../../Redux/dialogPageReducer';
 
 type PropsFriendsType = {
     dialogsData:Array<DialogsDataType>

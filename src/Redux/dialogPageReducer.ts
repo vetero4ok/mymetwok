@@ -48,15 +48,15 @@ export type InitDialogPageStateType = {
     massagesData: Array<MassagesDataType>
 
 }
-export type ActionTypeDialogPageReducer = AddMessageCallbackActionType
+export type DialogPageReducerActionType = AddMessageCallbackActionType
     | UpdateNewMessageTextActionType
 
 
 const ADD_MESSAGE_CALLBACK = 'ADD-MESSAGE-CALLBACK' as const
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT' as const
-export const DialogPageReducer =
+export const dialogPageReducer =
     (state = InitialState,
-     action: ActionTypeDialogPageReducer): InitDialogPageStateType => {
+     action: DialogPageReducerActionType): InitDialogPageStateType => {
 
         switch (action.type) {
             case ADD_MESSAGE_CALLBACK: {
@@ -67,7 +67,7 @@ export const DialogPageReducer =
                 return {
                     ...state,
                     newTextMassages: '',
-                    massagesData: [...state.massagesData, newMessage]
+                    massagesData: [newMessage,...state.massagesData]
                 }
             }
             case UPDATE_NEW_MESSAGE_TEXT:

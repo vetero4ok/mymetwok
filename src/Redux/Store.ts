@@ -1,5 +1,5 @@
 import {v1} from 'uuid';
-import { DialogPageReducer } from './DialogPageReducer';
+import { dialogPageReducer } from './dialogPageReducer';
 import {AddPostCallbackActionType, profilePageReducer, UpdateNewPostTextActionType} from './profilePageReducer';
 import {FollowACType, setUsersACType, UnfollowACType} from './usersPageReducer';
 
@@ -137,7 +137,7 @@ export type ActionType = AddPostCallbackActionType | UpdateNewPostTextActionType
 //@ts-ignore
         this._state.profilePage = profilePageReducer(this._state.profilePage,action)
 //@ts-ignore
-        this._state.dialogPage = DialogPageReducer(this._state.dialogPage,action)
+        this._state.dialogPage = dialogPageReducer(this._state.dialogPage,action)
         this._callbackSubscriber();
 
     }

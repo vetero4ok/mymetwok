@@ -1,7 +1,7 @@
 
 import {Dialogs} from './Dialogs';
 import {connect} from 'react-redux';
-import {addMessageCallbackAC, updateNewMessageTextAC} from '../../Redux/DialogPageReducer';
+import {addMessageCallbackAC, updateNewMessageTextAC} from '../../Redux/dialogPageReducer';
 import {AppDispatch, AppStateType} from '../../Redux/Redux-Store';
 
 

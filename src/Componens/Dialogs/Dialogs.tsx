@@ -1,7 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './Dialogs.module.css'
 import {Message} from './Message/Message';
-import {DialogsDataType, MassagesDataType} from '../../Redux/DialogPageReducer';
+import {DialogsDataType, MassagesDataType} from '../../Redux/dialogPageReducer';
 import {Dialog} from './DialogsItems/DialogsItem';
 
 

@@ -3,7 +3,7 @@ import React from 'react';
 import {BlockFriends} from './BlockFriends';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../../Redux/Redux-Store';
-import {DialogsDataType} from '../../../Redux/DialogPageReducer';
+import {DialogsDataType} from '../../../Redux/dialogPageReducer';
 
 
 

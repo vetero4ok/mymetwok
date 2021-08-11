@@ -2,7 +2,7 @@ import React from 'react';
 import {Friends} from './Friends';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../Redux/Redux-Store';
-import {DialogsDataType} from '../../Redux/DialogPageReducer';
+import {DialogsDataType} from '../../Redux/dialogPageReducer';
 
 
 type PropsFriendsType = {

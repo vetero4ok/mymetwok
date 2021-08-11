@@ -1,6 +1,6 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux';
 import {profilePageReducer} from './profilePageReducer';
-import {DialogPageReducer} from './DialogPageReducer';
+import {dialogPageReducer} from './dialogPageReducer';
 import {sidebarReducer} from './sidebarReducer';
 import { usersPageReducer } from './usersPageReducer';
 import {authUserReducer} from './authReducer';
@@ -9,7 +9,7 @@ import thunk from 'redux-thunk';
 
 let rootReducer =  combineReducers({
     profilePage:profilePageReducer,
-    dialogPage:DialogPageReducer,
+    dialogPage:dialogPageReducer,
     sidebar:sidebarReducer,
     usersPage:usersPageReducer,
     auth:authUserReducer,
