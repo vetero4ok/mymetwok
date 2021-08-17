@@ -3,18 +3,21 @@ import s from './Dialogs.module.css'
 import {Message} from './Message/Message';
 import {DialogsDataType, MassagesDataType} from '../../Redux/dialogPageReducer';
 import {Dialog} from './DialogsItems/DialogsItem';
+import { Redirect } from 'react-router-dom';
 
 
 
-type propsDialogsType = {
+
+type DialogsPropsType =  {
     newTextMassages: string
+    isAuth: boolean
     massagesData: Array<MassagesDataType>
     dialogsData: Array<DialogsDataType>
     addMessageCallback: (newText: string) => void
     updateNewMessageText: (value: string) => void
 }
 
-export function Dialogs(props: propsDialogsType) {
+export function Dialogs(props: DialogsPropsType) {
 
     const dialogElements = props.dialogsData.map(d =>
         <div key={d.id}>
@@ -51,6 +54,7 @@ export function Dialogs(props: propsDialogsType) {
             addMessageCallback()
         }
     }
+    if (!props.isAuth) return <Redirect to={'/login'}/>
 
     return (
         <div className={s.dialogs}>

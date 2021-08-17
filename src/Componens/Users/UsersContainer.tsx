@@ -70,7 +70,7 @@ let mapStateToProps = (state: AppStateType) => {
 }
 
 
-export const UsersContainer = connect(mapStateToProps, {
+export const UsersContainer = connect(mapStateToProps,{
     follow,
     unfollow,
     getUsers,

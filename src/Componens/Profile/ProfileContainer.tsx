@@ -1,6 +1,6 @@
 import React from 'react';
 import {Profile} from './Profile';
-import {setProfilePage,  UserProfileType} from '../../Redux/profilePageReducer';
+import {setProfilePage, UserProfileType} from '../../Redux/profilePageReducer';
 import {AppStateType} from '../../Redux/Redux-Store';
 import {connect} from 'react-redux';
 import {RouteComponentProps} from 'react-router';
@@ -14,11 +14,12 @@ type PropsType = RouteComponentProps<PathParamType> & {
     profile: UserProfileType | null
     setProfilePage: (userId: number) => void
     userId: number
+    isAuth:boolean
 }
 
 class ProfileApiComponents extends React.Component<PropsType> {
     componentDidMount() {
-    //  debugger
+        //  debugger
         let userId = +this.props.match.params.userId;
         /** Перевірка якщо в аресній строці нема id( undefined | null) то id беремо з authReducer і добавляємо до
          * профайла в кінець адресної строки, а  в PathParamType  userId: string тому неявно переводимо строку в число*/
@@ -28,6 +29,7 @@ class ProfileApiComponents extends React.Component<PropsType> {
         this.props.setProfilePage(userId)
 
     }
+
     // componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any) {
     //
     //     let userId = +this.props.match.params.userId;
@@ -51,7 +53,8 @@ class ProfileApiComponents extends React.Component<PropsType> {
 
 let mapStateToProps = (state: AppStateType) => ({
     profile: state.profilePage.profile,
-    userId: state.auth.userId
+    userId: state.auth.userId,
+    isAuth: state.auth.isAuth,
 })
 
 

@@ -10,6 +10,7 @@ import {ProfileContainer} from './Componens/Profile/ProfileContainer';
 import {HeaderContainer} from './Componens/Header/HeaderContainer';
 import { DialogsContainer } from './Componens/Dialogs/DialogsContainer';
 import {FriendsContainer} from './Componens/Friends/FriendsContainer';
+import {Login} from './Componens/Login/Login';
 
 
 
@@ -30,6 +31,7 @@ function App() {
                     <Route path="/settings" render={() => <Settings/>}/>
                     <Route path="/users" render={() => <UsersContainer/>}/>
                     <Route path="/friends" render={() => <FriendsContainer/>}/>
+                    <Route path="/login" render={() => <Login/>}/>
 
 
                 </div>

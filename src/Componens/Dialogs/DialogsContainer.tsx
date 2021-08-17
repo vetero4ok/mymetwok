@@ -1,4 +1,3 @@
-
 import {Dialogs} from './Dialogs';
 import {connect} from 'react-redux';
 import {addMessageCallbackAC, updateNewMessageTextAC} from '../../Redux/dialogPageReducer';
@@ -9,7 +8,8 @@ let mapStateToProps = (state: AppStateType) => {
     return {
         dialogsData: state.dialogPage.dialogsData,
         newTextMassages: state.dialogPage.newTextMassages,
-        massagesData: state.dialogPage.massagesData
+        massagesData: state.dialogPage.massagesData,
+        isAuth: state.auth.isAuth,
     }
 }
 let mapDispatchToProps = (dispatch: AppDispatch) => {
