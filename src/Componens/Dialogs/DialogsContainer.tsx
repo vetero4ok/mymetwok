@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {addMessageCallbackAC, updateNewMessageTextAC} from '../../Redux/dialogPageReducer';
 import {AppStateType} from '../../Redux/Redux-Store';
 import {withAuthRedirect} from '../../Hok/withAuthRedirect';
+import {compose} from 'redux';
+import React from 'react';
 
 
 let mapStateToProps = (state: AppStateType) => {
@@ -12,8 +14,11 @@ let mapStateToProps = (state: AppStateType) => {
         massagesData: state.dialogPage.massagesData,
     }
 }
-
-export const DialogsContainer = withAuthRedirect(connect(mapStateToProps,{
-    updateNewMessageTextAC,
-    addMessageCallbackAC,
-})(Dialogs))
+export const DialogsContainer = compose<React.ComponentType>(
+    connect(mapStateToProps, {
+        updateNewMessageTextAC,
+        addMessageCallbackAC,
+    }),
+    withAuthRedirect
+)
+(Dialogs)

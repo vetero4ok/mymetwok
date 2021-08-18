@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {RouteComponentProps} from 'react-router';
 import {withRouter} from 'react-router-dom';
 import {withAuthRedirect} from '../../Hok/withAuthRedirect';
+import {compose} from 'redux';
 
 
 type PathParamType = {
@@ -29,6 +30,7 @@ class ProfileApiComponents extends React.Component<PropsType> {
         this.props.setProfilePage(userId)
 
     }
+
     // componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any) {
     //
     //     let userId = +this.props.match.params.userId;
@@ -55,9 +57,9 @@ let mapStateToProps = (state: AppStateType) => ({
     userId: state.auth.userId,
 })
 
-
-let WithUrlDataContainerComponents = withRouter(ProfileApiComponents)
-
-
-export const ProfileContainer = withAuthRedirect(connect(mapStateToProps, { setProfilePage,
-})(WithUrlDataContainerComponents))
+export const ProfileContainer = compose<React.ComponentType>(
+    connect(mapStateToProps,
+        {setProfilePage,}),
+    withRouter,
+    withAuthRedirect)
+(ProfileApiComponents)
