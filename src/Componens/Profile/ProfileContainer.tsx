@@ -5,6 +5,7 @@ import {AppStateType} from '../../Redux/Redux-Store';
 import {connect} from 'react-redux';
 import {RouteComponentProps} from 'react-router';
 import {withRouter} from 'react-router-dom';
+import {withAuthRedirect} from '../../Hok/withAuthRedirect';
 
 
 type PathParamType = {
@@ -14,7 +15,6 @@ type PropsType = RouteComponentProps<PathParamType> & {
     profile: UserProfileType | null
     setProfilePage: (userId: number) => void
     userId: number
-    isAuth:boolean
 }
 
 class ProfileApiComponents extends React.Component<PropsType> {
@@ -29,7 +29,6 @@ class ProfileApiComponents extends React.Component<PropsType> {
         this.props.setProfilePage(userId)
 
     }
-
     // componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any) {
     //
     //     let userId = +this.props.match.params.userId;
@@ -54,13 +53,11 @@ class ProfileApiComponents extends React.Component<PropsType> {
 let mapStateToProps = (state: AppStateType) => ({
     profile: state.profilePage.profile,
     userId: state.auth.userId,
-    isAuth: state.auth.isAuth,
 })
 
 
 let WithUrlDataContainerComponents = withRouter(ProfileApiComponents)
 
 
-export const ProfileContainer = connect(mapStateToProps, {
-     setProfilePage,
-})(WithUrlDataContainerComponents)
+export const ProfileContainer = withAuthRedirect(connect(mapStateToProps, { setProfilePage,
+})(WithUrlDataContainerComponents))
