@@ -10,6 +10,7 @@ import instagram from '../../../assets/logos/instagram.png'
 import website from '../../../assets/logos/website.png'
 import facebook from '../../../assets/logos/Facebook.svg'
 import github from '../../../assets/logos/github.png'
+import {ProfileStatus} from './ProfileStatus/ProfileStatus';
 
 
 type profileInfoPropsType = {
@@ -25,9 +26,14 @@ export const ProfileInfo = (props: profileInfoPropsType) => {
             <div>
                 <img src={props.profile.photos.large} alt={'avatar'}/>
             </div>
+            {/*Description*/}
             <div>
-                {/*Description*/}
-                <h2>{props.profile.fullName}</h2>
+                <div className={s.statusWrap}>
+                    <div><h2>{props.profile.fullName}</h2></div>
+                    <div className={s.status}>
+                        <ProfileStatus status={'Предаємо якийсь статус у вигляді тексту'}/>
+                    </div>
+                </div>
                 <div>
                     <h3>Contacts:</h3>
                     <div>
@@ -55,7 +61,9 @@ export const ProfileInfo = (props: profileInfoPropsType) => {
                         <img src={youtube} alt={'youtube '} className={s.logos}/>
                         {props.profile.contacts.youtube}</div>
                 </div>
+
             </div>
+
 
         </div>
 

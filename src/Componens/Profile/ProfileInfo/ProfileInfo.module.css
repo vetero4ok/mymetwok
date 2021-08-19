@@ -8,4 +8,13 @@
     width: 20px;
     height: 20px;
 }
-
+.statusWrap {
+    display: flex;
+    justify-content: flex-start;
+}
+.status{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
+}
