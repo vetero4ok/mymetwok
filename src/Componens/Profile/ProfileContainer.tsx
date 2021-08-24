@@ -1,6 +1,6 @@
 import React from 'react';
 import {Profile} from './Profile';
-import {setProfilePage, UserProfileType} from '../../Redux/profilePageReducer';
+import {getStatusProfileTC, setProfilePage, setStatusProfileTC, UserProfileType} from '../../Redux/profilePageReducer';
 import {AppStateType} from '../../Redux/Redux-Store';
 import {connect} from 'react-redux';
 import {RouteComponentProps} from 'react-router';
@@ -15,7 +15,10 @@ type PathParamType = {
 type PropsType = RouteComponentProps<PathParamType> & {
     profile: UserProfileType | null
     setProfilePage: (userId: number) => void
+    getStatusProfileTC:(userId: number) => void
+    setStatusProfileTC:(title: string) => void
     userId: number
+    profileStatus:string
 }
 
 class ProfileApiComponents extends React.Component<PropsType> {
@@ -28,6 +31,8 @@ class ProfileApiComponents extends React.Component<PropsType> {
             userId = this.props.userId
         }
         this.props.setProfilePage(userId)
+        this.props.getStatusProfileTC(userId)
+
 
     }
 
@@ -46,6 +51,8 @@ class ProfileApiComponents extends React.Component<PropsType> {
                 <Profile
                     {...this.props}
                     profile={this.props.profile}
+                    profileStatus = {this.props.profileStatus}
+
                 />
             </>
         );
@@ -55,11 +62,12 @@ class ProfileApiComponents extends React.Component<PropsType> {
 let mapStateToProps = (state: AppStateType) => ({
     profile: state.profilePage.profile,
     userId: state.auth.userId,
+    profileStatus: state.profilePage.profileStatus,
 })
 
 export const ProfileContainer = compose<React.ComponentType>(
     connect(mapStateToProps,
-        {setProfilePage,}),
+        {setProfilePage, getStatusProfileTC, setStatusProfileTC}),
     withRouter,
     withAuthRedirect)
 (ProfileApiComponents)

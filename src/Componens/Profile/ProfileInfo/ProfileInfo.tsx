@@ -15,6 +15,8 @@ import {ProfileStatus} from './ProfileStatus/ProfileStatus';
 
 type profileInfoPropsType = {
     profile: UserProfileType | null
+    profileStatus:string
+    setStatusProfileTC:(title: string) => void
 }
 
 export const ProfileInfo = (props: profileInfoPropsType) => {
@@ -31,7 +33,10 @@ export const ProfileInfo = (props: profileInfoPropsType) => {
                 <div className={s.statusWrap}>
                     <div><h2>{props.profile.fullName}</h2></div>
                     <div className={s.status}>
-                        <ProfileStatus status={'Предаємо якийсь статус у вигляді тексту'}/>
+                        <ProfileStatus
+                            profileStatus={props.profileStatus}
+                            setStatusProfileTC = {props.setStatusProfileTC}
+                        />
                     </div>
                 </div>
                 <div>

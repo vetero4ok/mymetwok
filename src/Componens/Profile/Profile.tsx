@@ -7,6 +7,9 @@ import {UserProfileType} from '../../Redux/profilePageReducer';
 
 type ProfilePropsType = {
     profile: UserProfileType | null
+    profileStatus:string
+    setStatusProfileTC:(title: string) => void
+
 }
 
 
@@ -16,6 +19,8 @@ export const Profile = (props: ProfilePropsType) => {
                {/*Main content*/}
             <ProfileInfo
                 profile={props.profile}
+                profileStatus={props.profileStatus}
+                setStatusProfileTC = {props.setStatusProfileTC}
             />
             <MyPostsContainer/>
 

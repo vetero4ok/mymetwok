@@ -9,7 +9,8 @@ let InitialState = {
         {id: v1(), massage: 'It is my first post!', likesCounts: 15},
         {id: v1(), massage: 'hey!', likesCounts: 1},
     ],
-    profile: null
+    profile: null,
+    profileStatus: '',
 
 }
 export type ContactsType = {
@@ -44,15 +45,17 @@ export type ProfileStateType = {
     newTextPost: string
     myPostsData: Array<MyPostsDataType>
     profile: UserProfileType | null
+    profileStatus: string
 }
 type ActionTypeProfileReducer = AddPostCallbackActionType
     | UpdateNewPostTextActionType
-    | setUserProfileActionType
+    | SetUserProfileActionType
+    | SetStatusProfileActionType
 
 const ADD_POST_CALLBACK = 'ADD-POST-CALLBACK' as const;
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT' as const;
 const SET_USER_PROFILE = 'SET-USER-PROFILE' as const
-
+const SET_STATUS_PROFILE = 'SET-STATUS-PROFILE' as const;
 export const profilePageReducer = (state: ProfileStateType = InitialState, action: ActionTypeProfileReducer): ProfileStateType => {
 
     switch (action.type) {
@@ -64,13 +67,15 @@ export const profilePageReducer = (state: ProfileStateType = InitialState, actio
             }
             return {
                 ...state,
-                myPostsData: [newPost,...state.myPostsData]
+                myPostsData: [newPost, ...state.myPostsData]
             }
         }
         case UPDATE_NEW_POST_TEXT:
             return {...state, newTextPost: action.newText}
         case SET_USER_PROFILE:
             return {...state, profile: action.profile}
+        case SET_STATUS_PROFILE :
+            return {...state, profileStatus: action.status}
         default:
             return state
     }
@@ -93,9 +98,16 @@ export const setUserProfile = (profile: UserProfileType) => {
         profile
     } as const
 }
+export const setStatusProfile = (status: string) => {
+    return {
+        type: SET_STATUS_PROFILE,
+        status
+    } as const
+}
 export type AddPostCallbackActionType = ReturnType<typeof addPostCallbackAC>
 export type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextAC>
-export type setUserProfileActionType = ReturnType<typeof setUserProfile>
+export type SetUserProfileActionType = ReturnType<typeof setUserProfile>
+export type SetStatusProfileActionType = ReturnType<typeof setStatusProfile>
 
 export const setProfilePage = (userId: number) => {
     return (dispatch: AppDispatch) => {
@@ -103,4 +115,16 @@ export const setProfilePage = (userId: number) => {
             dispatch(setUserProfile(response.data));
         })
     }
+}
+export const getStatusProfileTC = (userId: number) => (dispatch: AppDispatch) => {
+   // debugger
+    profileAPI.getStatus(userId).then((res) =>
+        dispatch(setStatusProfile(res.data)))
+}
+export  const setStatusProfileTC = (title:string) =>  (dispatch: AppDispatch) => {
+    profileAPI.changeStatus(title).then((res) => {
+        if(res.data.resultCode === 0){
+            dispatch(setStatusProfile(title))
+        } else console.log(res.data.messages)
+    })
 }

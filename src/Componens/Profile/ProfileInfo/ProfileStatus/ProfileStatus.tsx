@@ -1,29 +1,37 @@
-import React from 'react';
+import React, {ChangeEvent,KeyboardEvent} from 'react';
 
 type StatusComponentPropsType = {
-    status: string
+    profileStatus: string
+    setStatusProfileTC: (title: string) => void
 }
 type StatusComponentState = {
     editMode: boolean
-  //  title:string
+    localStatus: string
 }
 
 export class ProfileStatus extends React.Component<StatusComponentPropsType, StatusComponentState> {
     state = {
         editMode: false,
-      //  title: '',
+        localStatus: this.props.profileStatus,
     }
-
-    activateEditMode() {
+    onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        this.setState({
+            localStatus: e.currentTarget.value
+        })
+    }
+    onEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter')  this.deActivateEditMode()
+    }
+    activateEditMode = () => {
         this.setState({
             editMode: true,
         })
     }
-
-    deActivateEditMode() {
+    deActivateEditMode = () => {
         this.setState({
             editMode: false,
-          })
+        })
+        this.props.setStatusProfileTC(this.state.localStatus)
     }
 
     render() {
@@ -33,8 +41,8 @@ export class ProfileStatus extends React.Component<StatusComponentPropsType, Sta
                     !this.state.editMode &&
                     <div>
                         <span
-                            onDoubleClick={this.activateEditMode.bind(this)}
-                        >{this.props.status}</span>
+                            onDoubleClick={this.activateEditMode}
+                        >{(this.props.profileStatus === '') ? 'My status' : this.props.profileStatus}</span>
                     </div>
                 }
                 {
@@ -42,12 +50,11 @@ export class ProfileStatus extends React.Component<StatusComponentPropsType, Sta
                     <div>
                         <input
                             type="text"
-                            placeholder={'input text'}
-                            value={this.props.status}
-                            // onChange={(e)=>this.setState({
-                            //     title: e.currentTarget.value
-                            // })}
-                            onBlur={this.deActivateEditMode.bind(this)}
+                            placeholder={'Input your status'}
+                            value={this.state.localStatus}
+                            onChange={this.onChangeHandler}
+                            onKeyPress={this.onEnter}
+                            onBlur={this.deActivateEditMode}
                             autoFocus
                         />
                     </div>

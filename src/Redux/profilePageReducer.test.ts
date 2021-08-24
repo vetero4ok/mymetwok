@@ -19,7 +19,8 @@ beforeEach(() => {
             {id: v1(), massage: 'It is my first post!', likesCounts: 15},
             {id: v1(), massage: 'hey!', likesCounts: 1},
         ],
-        profile: null
+        profile: null,
+        profileStatus:'null',
     }
 })
 
