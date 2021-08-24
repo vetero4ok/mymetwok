@@ -28,6 +28,7 @@ export type PhotosType = {
     large: string
 }
 export type UserProfileType = {
+    aboutMe: string | null
     userId: number
     lookingForAJob: boolean
     lookingForAJobDescription: string
@@ -117,13 +118,13 @@ export const setProfilePage = (userId: number) => {
     }
 }
 export const getStatusProfileTC = (userId: number) => (dispatch: AppDispatch) => {
-   // debugger
+    // debugger
     profileAPI.getStatus(userId).then((res) =>
         dispatch(setStatusProfile(res.data)))
 }
-export  const setStatusProfileTC = (title:string) =>  (dispatch: AppDispatch) => {
+export const setStatusProfileTC = (title: string) => (dispatch: AppDispatch) => {
     profileAPI.changeStatus(title).then((res) => {
-        if(res.data.resultCode === 0){
+        if (res.data.resultCode === 0) {
             dispatch(setStatusProfile(title))
         } else console.log(res.data.messages)
     })
