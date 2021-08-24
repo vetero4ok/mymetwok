@@ -2,7 +2,7 @@ import {v1} from 'uuid';
 import {
     addPostCallbackAC,
     profilePageReducer,
-    ProfileStateType,
+    ProfileStateType, setStatusProfile,
     setUserProfile,
     updateNewPostTextAC,
     UserProfileType
@@ -20,7 +20,7 @@ beforeEach(() => {
             {id: v1(), massage: 'hey!', likesCounts: 1},
         ],
         profile: null,
-        profileStatus:'null',
+        profileStatus:'',
     }
 })
 
@@ -83,4 +83,10 @@ test('profile should be installed', () => {
             large: 'string',
         }
     })
+})
+test('input text to be update profileStatus', () => {
+
+    const state = profilePageReducer(startState, setStatusProfile('new STATUS'))
+
+    expect(state.profileStatus).toBe('new STATUS')
 })
