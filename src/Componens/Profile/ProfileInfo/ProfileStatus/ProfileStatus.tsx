@@ -1,4 +1,4 @@
-import React, {ChangeEvent,KeyboardEvent} from 'react';
+import React, {ChangeEvent, KeyboardEvent} from 'react';
 
 type StatusComponentPropsType = {
     profileStatus: string
@@ -20,7 +20,7 @@ export class ProfileStatus extends React.Component<StatusComponentPropsType, Sta
         })
     }
     onEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter')  this.deActivateEditMode()
+        if (e.key === 'Enter') this.deActivateEditMode()
     }
     activateEditMode = () => {
         this.setState({
@@ -32,6 +32,14 @@ export class ProfileStatus extends React.Component<StatusComponentPropsType, Sta
             editMode: false,
         })
         this.props.setStatusProfileTC(this.state.localStatus)
+    }
+
+    componentDidUpdate(prevProps: Readonly<StatusComponentPropsType>, prevState: Readonly<StatusComponentState>) {
+        if (prevProps.profileStatus !== this.props.profileStatus) {
+            this.setState({
+                localStatus: this.props.profileStatus
+            })
+        }
     }
 
     render() {
