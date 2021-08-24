@@ -29,9 +29,6 @@ type CommonResponseType<T = {}> = {
 export const userAPI = {
     getUsers(currentPages: number, pageSize: number) {
         return instance.get<GetUsersType>(`users?page=${currentPages}&count=${pageSize}`)
-            .then(response => {
-                return response.data
-            })
     },
     followUser(userId: number) {
         return instance.post<CommonResponseType>(`follow/${userId}`)

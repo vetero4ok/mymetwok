@@ -42,6 +42,7 @@ test('input text to be update without local state (FLUX architecture)', () => {
 
 test('profile should be installed', () => {
     const user: UserProfileType = {
+        aboutMe: 'hi I am Igor',
         userId: 1,
         lookingForAJob: true,
         lookingForAJobDescription: 'FrontEnd',
