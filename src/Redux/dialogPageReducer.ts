@@ -24,7 +24,6 @@ const InitialState: InitDialogPageStateType = {
             avatar: 'https://buddy.ghostpool.com/wp-content/uploads/group-avatars/34/1c7da6471476e42b543812f35ef23d2f-bpthumb.jpg',
         },
     ],
-    newTextMassages: '',
     massagesData: [
         {id: v1(), massage: 'Hi!'},
         {id: v1(), massage: 'How are you?'},
@@ -43,19 +42,15 @@ export type MassagesDataType = {
     massage: string
 }
 export type InitDialogPageStateType = {
-    newTextMassages: string
     dialogsData: Array<DialogsDataType>
     massagesData: Array<MassagesDataType>
 
 }
 export type DialogPageReducerActionType = AddMessageCallbackActionType
-    | UpdateNewMessageTextActionType
 
 
 const ADD_MESSAGE_CALLBACK = 'ADD-MESSAGE-CALLBACK' as const
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT' as const
-export const dialogPageReducer =
-    (state = InitialState,
+export const dialogPageReducer =    (state = InitialState,
      action: DialogPageReducerActionType): InitDialogPageStateType => {
 
         switch (action.type) {
@@ -64,34 +59,11 @@ export const dialogPageReducer =
                     id: v1(),
                     massage: action.message,
                 }
-                return {
-                    ...state,
-                    newTextMassages: '',
-                    massagesData: [...state.massagesData,newMessage]
-                }
+                return {...state, massagesData: [...state.massagesData,newMessage] }
             }
-            case UPDATE_NEW_MESSAGE_TEXT:
-                return {
-                    ...state,
-                    newTextMassages: action.newMessage
-                }
             default:
                 return state
         }
-
     }
-export const addMessageCallbackAC = (message: string) => {
-    return {
-        type: ADD_MESSAGE_CALLBACK,
-        message: message
-    } as const
-}
-export const updateNewMessageTextAC = (newMessage: string) => {
-    return {
-        type: UPDATE_NEW_MESSAGE_TEXT,
-        newMessage: newMessage
-    } as const
-
-}
-export type UpdateNewMessageTextActionType = ReturnType<typeof updateNewMessageTextAC>
+export const addMessageCallbackAC = (message: string) => ( {type: ADD_MESSAGE_CALLBACK,message: message} as const)
 export type AddMessageCallbackActionType = ReturnType<typeof addMessageCallbackAC>

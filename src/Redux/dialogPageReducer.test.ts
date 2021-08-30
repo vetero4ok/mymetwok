@@ -3,8 +3,7 @@ import {
     addMessageCallbackAC,
     dialogPageReducer,
     InitDialogPageStateType,
-    updateNewMessageTextAC
-} from './dialogPageReducer';
+    } from './dialogPageReducer';
 
 let startState:InitDialogPageStateType
 //type StartState = typeof startState
@@ -37,7 +36,6 @@ beforeEach(() => {
                 avatar: 'https://buddy.ghostpool.com/wp-content/uploads/group-avatars/34/1c7da6471476e42b543812f35ef23d2f-bpthumb.jpg',
             },
         ],
-        newTextMassages: '',
         massagesData: [
             {id: v1(), massage: 'Hi!'},
             {id: v1(), massage: 'How are you?'},
@@ -58,10 +56,3 @@ const state = dialogPageReducer(startState,addMessageCallbackAC('new message'))
 
 })
 
-test('input text to be update without local state (FLUX architecture)', () => {
-
-    const state = dialogPageReducer(startState,updateNewMessageTextAC('new symbol'))
-
-    expect(state.newTextMassages).toBe('new symbol')
-
-} )

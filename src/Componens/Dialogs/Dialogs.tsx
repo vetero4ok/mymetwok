@@ -1,16 +1,15 @@
-import React, {ChangeEvent, KeyboardEvent} from 'react';
+import React from 'react';
 import s from './Dialogs.module.css'
 import {Message} from './Message/Message';
 import {DialogsDataType, MassagesDataType} from '../../Redux/dialogPageReducer';
 import {Dialog} from './DialogsItems/DialogsItem';
+import {AddMessageReduxForm} from './Message/AddMessageForm';
 
 
-type DialogsPropsType =  {
-    newTextMassages: string
+type DialogsPropsType = {
     massagesData: Array<MassagesDataType>
     dialogsData: Array<DialogsDataType>
     addMessageCallback: (newText: string) => void
-    updateNewMessageText: (value: string) => void
 }
 
 export function Dialogs(props: DialogsPropsType) {
@@ -34,21 +33,10 @@ export function Dialogs(props: DialogsPropsType) {
             {/*/>*/}
         </div>
     )
-    const addMessageCallback = () => {
-        let validatedValue = props.newTextMassages.trim()
-        if (validatedValue) {
-            props.addMessageCallback(validatedValue)
-        }
-        props.updateNewMessageText('')
-    }
-    const updateNewMessageText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        e.currentTarget &&
-        props.updateNewMessageText(e.currentTarget.value)
-    }
-    const onChangeKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-        if (e.key === 'Enter') {
-            addMessageCallback()
-        }
+    /** Refactor Any*/
+    const onSubmit = (formData: any) => {
+        let message = formData.updateNewMessageText.trim()
+        props.addMessageCallback(message)
     }
     return (
         <div className={s.dialogs}>
@@ -61,14 +49,7 @@ export function Dialogs(props: DialogsPropsType) {
                 {dialogMessage}
             </div>
             <div>
-                <textarea
-                    value={props.newTextMassages}
-                    placeholder="Enter your message"
-                    onChange={updateNewMessageText}
-                    onKeyPress={onChangeKeyPress}
-                />
-
-                <button onClick={addMessageCallback}>send</button>
+                <AddMessageReduxForm onSubmit={onSubmit}/>
             </div>
         </div>
     )
