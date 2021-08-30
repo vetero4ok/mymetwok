@@ -1,20 +1,17 @@
-import React, {ChangeEvent, KeyboardEvent} from 'react';
+import React from 'react';
 import s from './MyPosts.module.css';
 import {Posts} from './Post/Posts';
 import {MyPostsDataType,} from '../../../../Redux/Store';
-import SuperButton from '../../../Common/Button/SuperButton';
-import SuperInputText from '../../../Common/SuperInput/SuperInputText';
+import {AddPostReduxForm} from './PostForm/PostForm';
 
 
-type propsMyPostType = {
+type MyPostPropsType = {
     myPostsData: Array<MyPostsDataType>
-    newTextPost: string
     addPostCallback: (newPost: string) => void
-    updateNewPostText: (text: string) => void
 }
 
 
-export const MyPosts = (props: propsMyPostType) => {
+export const MyPosts = (props: MyPostPropsType) => {
 
     const myPostsElements = props.myPostsData.map(p =>
         <Posts
@@ -22,55 +19,26 @@ export const MyPosts = (props: propsMyPostType) => {
             massage={p.massage}
             likesCounts={p.likesCounts}
         />)
-
-    /** addPostCallbackAC створення dispatch обєкту з параметром props.newTextPost */
-    const addPostCallback = () => {
-        let validatedValue = props.newTextPost.trim()
-        if (validatedValue) {
-            props.addPostCallback(validatedValue)
-        }
-        props.updateNewPostText('')
-
+    // const onChangeKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    //     if (e.key === 'Enter') {
+    //         // addPostCallback()
+    //     }
+    // }
+    const onSubmit = (formData: any) => {
+        props.addPostCallback(formData.newTextPost)
     }
-    const onChangeKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-        if (e.key === 'Enter') {
-            addPostCallback()
-        }
-    }
-    /** Плохой тон писать props.dispatch(updateNewPostTextAC(e.currentTarget.value)) =>
-     *  либо через if(e.currentTarget) либо && */
-    const updateNewPostText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        e.currentTarget &&
-        props.updateNewPostText(e.currentTarget.value)
-    }
-
 
     return (
-
         <div className={s.posts}>
             <div>
-                My posts
-            </div>
-
-            <div>
-                {/*<SuperInputText*/}
-                {/*    */}
-                {/*/>*/}
-                <textarea
-                    value={props.newTextPost}
-                    onChange={updateNewPostText}
-                    onKeyPress={onChangeKeyPress}
-
-                />
+                <h3>My posts</h3>
             </div>
             <div>
-                <SuperButton onClick={addPostCallback}>send</SuperButton>
+                <AddPostReduxForm onSubmit={onSubmit}/>
             </div>
-
             <div>
                 {myPostsElements}
             </div>
-
         </div>
     );
 }

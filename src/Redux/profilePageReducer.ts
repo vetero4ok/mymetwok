@@ -3,7 +3,6 @@ import {AppDispatch} from './Redux-Store';
 import {profileAPI} from '../Api/Api';
 
 let InitialState = {
-    newTextPost: '',
     myPostsData: [
         {id: v1(), massage: 'Hi, how are you?', likesCounts: 12},
         {id: v1(), massage: 'It is my first post!', likesCounts: 15},
@@ -43,18 +42,16 @@ export type MyPostsDataType = {
     likesCounts: number
 }
 export type ProfileStateType = {
-    newTextPost: string
     myPostsData: Array<MyPostsDataType>
     profile: UserProfileType | null
     profileStatus: string
 }
-type ActionTypeProfileReducer = AddPostCallbackActionType
-    | UpdateNewPostTextActionType
+type ActionTypeProfileReducer =
+    | AddPostCallbackActionType
     | SetUserProfileActionType
     | SetStatusProfileActionType
 
 const ADD_POST_CALLBACK = 'ADD-POST-CALLBACK' as const;
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT' as const;
 const SET_USER_PROFILE = 'SET-USER-PROFILE' as const
 const SET_STATUS_PROFILE = 'SET-STATUS-PROFILE' as const;
 export const profilePageReducer = (state: ProfileStateType = InitialState, action: ActionTypeProfileReducer): ProfileStateType => {
@@ -71,8 +68,6 @@ export const profilePageReducer = (state: ProfileStateType = InitialState, actio
                 myPostsData: [newPost, ...state.myPostsData]
             }
         }
-        case UPDATE_NEW_POST_TEXT:
-            return {...state, newTextPost: action.newText}
         case SET_USER_PROFILE:
             return {...state, profile: action.profile}
         case SET_STATUS_PROFILE :
@@ -81,18 +76,10 @@ export const profilePageReducer = (state: ProfileStateType = InitialState, actio
             return state
     }
 }
-export const addPostCallbackAC = (postMessage: string) => {
-    return {
-        type: ADD_POST_CALLBACK,
-        postMessage: postMessage
-    } as const
-}
-export const updateNewPostTextAC = (newText: string) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        newText: newText
-    } as const
-}
+export const addPostCallbackAC = (postMessage: string) =>
+    ({type: ADD_POST_CALLBACK, postMessage: postMessage} as const)
+
+
 export const setUserProfile = (profile: UserProfileType) => {
     return {
         type: SET_USER_PROFILE,
@@ -106,7 +93,6 @@ export const setStatusProfile = (status: string) => {
     } as const
 }
 export type AddPostCallbackActionType = ReturnType<typeof addPostCallbackAC>
-export type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextAC>
 export type SetUserProfileActionType = ReturnType<typeof setUserProfile>
 export type SetStatusProfileActionType = ReturnType<typeof setStatusProfile>
 
@@ -118,7 +104,6 @@ export const setProfilePage = (userId: number) => {
     }
 }
 export const getStatusProfileTC = (userId: number) => (dispatch: AppDispatch) => {
-    // debugger
     profileAPI.getStatus(userId).then((res) =>
         dispatch(setStatusProfile(res.data)))
 }

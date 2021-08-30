@@ -2,9 +2,9 @@ import {v1} from 'uuid';
 import {
     addPostCallbackAC,
     profilePageReducer,
-    ProfileStateType, setStatusProfile,
+    ProfileStateType,
+    setStatusProfile,
     setUserProfile,
-    updateNewPostTextAC,
     UserProfileType
 } from './profilePageReducer';
 
@@ -13,7 +13,6 @@ let startState: ProfileStateType
 beforeEach(() => {
 
     startState = {
-        newTextPost: '',
         myPostsData: [
             {id: v1(), massage: 'Hi, how are you?', likesCounts: 12},
             {id: v1(), massage: 'It is my first post!', likesCounts: 15},
@@ -32,12 +31,6 @@ test('correct post should be added to up wall', () => {
     expect(state.myPostsData[0].id).toBeDefined()
     expect(state.myPostsData.length).toBe(4)
 
-})
-test('input text to be update without local state (FLUX architecture)', () => {
-
-    const state = profilePageReducer(startState, updateNewPostTextAC('new symbol'))
-
-    expect(state.newTextPost).toBe('new symbol')
 })
 
 test('profile should be installed', () => {

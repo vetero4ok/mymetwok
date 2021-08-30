@@ -1,6 +1,6 @@
 import {v1} from 'uuid';
-import { dialogPageReducer } from './dialogPageReducer';
-import {AddPostCallbackActionType, profilePageReducer, UpdateNewPostTextActionType} from './profilePageReducer';
+import {dialogPageReducer} from './dialogPageReducer';
+import {AddPostCallbackActionType, profilePageReducer, } from './profilePageReducer';
 import {FollowACType, setUsersACType, UnfollowACType} from './usersPageReducer';
 
 
@@ -41,8 +41,11 @@ export type RootStateType = {
     sidebar: SidebarType,
 
 }
-export type ActionType = AddPostCallbackActionType | UpdateNewPostTextActionType
-    |FollowACType|UnfollowACType|setUsersACType
+export type ActionType =
+    |AddPostCallbackActionType
+    |FollowACType
+    |UnfollowACType
+    |setUsersACType
 
  type StoreType = {
     _state: RootStateType
