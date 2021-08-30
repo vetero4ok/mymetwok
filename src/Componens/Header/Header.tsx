@@ -3,7 +3,6 @@ import s from './Header.module.css';
 import ava from '../../assets/images/myDefaultAva.jpg'
 import {NavLink} from 'react-router-dom';
 import {UserProfileType} from '../../Redux/profilePageReducer';
-import {Preloader} from '../Common/Preloader/Preloader';
 import logo_header from '../../assets/logos/logo_header.png'
 import SuperButton from '../Common/Button/SuperButton';
 
@@ -14,9 +13,9 @@ type ProsHeaderType = {
 }
 
 export const Header = (props: ProsHeaderType) => {
-    if (!props.profile && props.profile === null) {
-        return <Preloader/>
-    }
+    // if (!props.profile && props.profile === null) {
+    //     return <Preloader/>
+    // }
     return (
         <header className={s.header}>
             <img src={logo_header} alt={'app logo'}/>
@@ -37,7 +36,7 @@ export const Header = (props: ProsHeaderType) => {
                 </div>
                 :
                 <NavLink to={'/login'}>
-                    <SuperButton >
+                    <SuperButton  >
                         Login
                     </SuperButton>
                 </NavLink>}
