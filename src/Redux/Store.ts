@@ -136,6 +136,7 @@ export type ActionType =
     subscribe(observer) {  //оригінальна функція в редаксі пишеться з маленької букви
         this._callbackSubscriber = observer;
     },
+     //@ts-ignore
     dispatch(action: ActionType) { // {type: 'ADD-POST-CALLBACK'}
 //@ts-ignore
         this._state.profilePage = profilePageReducer(this._state.profilePage,action)

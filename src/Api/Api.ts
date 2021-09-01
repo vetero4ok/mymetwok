@@ -20,8 +20,8 @@ type GetUsersType = {
 }
 type CommonResponseType<T = {}> = {
     data: T
-    fieldsErrors: []
-    messages: []
+    fieldsErrors: Array<string>
+    messages: Array<string>
     resultCode: number
 }
 
@@ -53,5 +53,11 @@ export const profileAPI = {
 export const authMeAPI = {
     authMe() {
         return instance.get<CommonResponseType<AuthMe>>(`auth/me`)
+    },
+    login (email:string,password:string,rememberMe:boolean,captcha:boolean) {
+        return instance.post<CommonResponseType<number>>(`auth/login`, {email,password,rememberMe,captcha})
+    },
+    logout () {
+        return instance.delete<CommonResponseType>(`auth/login`)
     },
 }

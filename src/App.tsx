@@ -8,12 +8,9 @@ import {Settings} from './Componens/Settings/Settings';
 import {UsersContainer} from './Componens/Users/UsersContainer';
 import {ProfileContainer} from './Componens/Profile/ProfileContainer';
 import {HeaderContainer} from './Componens/Header/HeaderContainer';
-import { DialogsContainer } from './Componens/Dialogs/DialogsContainer';
+import {DialogsContainer} from './Componens/Dialogs/DialogsContainer';
 import {FriendsContainer} from './Componens/Friends/FriendsContainer';
-import {Login} from './Componens/Login/Login';
-
-
-
+import {LoginByConnect} from './Componens/Login/Login';
 
 
 function App() {
@@ -31,7 +28,7 @@ function App() {
                     <Route path="/settings" render={() => <Settings/>}/>
                     <Route path="/users" render={() => <UsersContainer/>}/>
                     <Route path="/friends" render={() => <FriendsContainer/>}/>
-                    <Route path="/login" render={() => <Login/>}/>
+                    <Route path="/login" render={() => <LoginByConnect/>}/>
 
 
                 </div>

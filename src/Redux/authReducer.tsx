@@ -1,19 +1,18 @@
-import {AppDispatch} from './Redux-Store';
-import {authMeAPI, profileAPI} from '../Api/Api';
+import {AppDispatch, AppThunk} from './Redux-Store';
+import {authMeAPI} from '../Api/Api';
 import {toggleIsFetching} from './usersPageReducer';
-import {setUserProfile} from './profilePageReducer';
 
 let InitialState: InitAuthStateType = {
     /** заглушка надо придумать как загружать данные
      * userId: 17817, login: '',  email: '',*/
-    userId: 17817,
+    userId: null,
     login: '',
     email: '',
     isAuth: false,
 
 }
 export type InitAuthStateType = {
-    userId: number
+    userId: number | null
     login: string
     email: string
     isAuth: boolean
@@ -25,23 +24,23 @@ const SET_USER_DATA = 'SET_USER_DATA' as const
 export type ActionTypeAuthReducer = SetUserAuthDataActionType
 
 export const authUserReducer =
-    (state = InitialState,action: ActionTypeAuthReducer): InitAuthStateType => {
-    switch (action.type) {
-        case SET_USER_DATA:
-            return {
-                ...state,
-                userId: action.userId,
-                email: action.email,
-                login: action.login,
-                isAuth: action.isAuth
-            }
-        default:
-            return state
+    (state = InitialState, action: ActionTypeAuthReducer): InitAuthStateType => {
+        switch (action.type) {
+            case SET_USER_DATA:
+                return {
+                    ...state,
+                    userId: action.userId,
+                    email: action.email,
+                    login: action.login,
+                    isAuth: action.isAuth
+                }
+            default:
+                return state
+        }
     }
-}
 
 
-export const setUserAuthDataSuccess = (userId: number, email: string, login: string, isAuth: boolean) => {
+export const setUserAuthDataSuccess = (userId: number | null, email: string, login: string, isAuth: boolean) => {
     return {
         type: SET_USER_DATA,
         userId,
@@ -53,19 +52,44 @@ export const setUserAuthDataSuccess = (userId: number, email: string, login: str
 
 export type SetUserAuthDataActionType = ReturnType<typeof setUserAuthDataSuccess>
 
-export const setUserAuthData = (userId:number) => {
-    return (dispatch:AppDispatch)=>{
+export const setUserAuthData = (): AppThunk => {
+    return (dispatch: AppDispatch) => {
         dispatch(toggleIsFetching(true));
         authMeAPI.authMe().then(response => {
             if (response.data.resultCode === 0) {
                 let {id, email, login} = response.data.data
                 dispatch(setUserAuthDataSuccess(id, email, login, true));
-                profileAPI.getProfile(userId)
-                    .then(response => {
-                        dispatch(setUserProfile(response.data));
-                    })
-               dispatch(toggleIsFetching(false));
+                dispatch(toggleIsFetching(false));
             }
         })
     }
 }
+
+export const loginTC = (email: string, password: string, rememberMe: boolean, captcha: boolean): AppThunk =>
+    (dispatch: AppDispatch) => {
+        authMeAPI.login(email, password, rememberMe, captcha)
+            .then(res => {
+                if (res.data.resultCode === 0) {
+                    authMeAPI.authMe().then(response => {
+                        if (response.data.resultCode === 0) {
+                            let {id, email, login} = response.data.data
+                            dispatch(setUserAuthDataSuccess(id, email, login, true));
+                            dispatch(toggleIsFetching(false));
+                        }
+                    })
+                   // dispatch(setUserAuthData())
+                    /** немогу задиспатчить санку, странная ошибка*/
+                }
+            })
+
+    }
+export const logoutTC = (): AppThunk =>
+    (dispatch: AppDispatch) => {
+        authMeAPI.logout()
+            .then(res => {
+                if (res.data.resultCode === 0) {
+                    dispatch(setUserAuthDataSuccess(null, '', '', false));
+                }
+            })
+
+    }

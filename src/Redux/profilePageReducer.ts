@@ -46,7 +46,7 @@ export type ProfileStateType = {
     profile: UserProfileType | null
     profileStatus: string
 }
-type ActionTypeProfileReducer =
+export type ActionTypeProfileReducer =
     | AddPostCallbackActionType
     | SetUserProfileActionType
     | SetStatusProfileActionType
