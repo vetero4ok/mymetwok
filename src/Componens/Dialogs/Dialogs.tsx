@@ -3,7 +3,7 @@ import s from './Dialogs.module.css'
 import {Message} from './Message/Message';
 import {DialogsDataType, MassagesDataType} from '../../Redux/dialogPageReducer';
 import {Dialog} from './DialogsItems/DialogsItem';
-import {AddMessageReduxForm} from './Message/AddMessageForm';
+import {AddMessageReduxForm, FormDataMessageType} from './Message/AddMessageForm';
 
 
 type DialogsPropsType = {
@@ -11,7 +11,9 @@ type DialogsPropsType = {
     dialogsData: Array<DialogsDataType>
     addMessageCallback: (newText: string) => void
 }
-
+// export type DialogsFormValuePropsType = {
+//     updateNewMessageText:string
+// }
 export function Dialogs(props: DialogsPropsType) {
 
     const dialogElements = props.dialogsData.map(d =>
@@ -34,9 +36,10 @@ export function Dialogs(props: DialogsPropsType) {
         </div>
     )
     /** Refactor Any*/
-    const onSubmit = (formData: any) => {
-        let message = formData.updateNewMessageText.trim()
-        props.addMessageCallback(message)
+
+    const onSubmit = (formData: FormDataMessageType) => {
+       let message = formData.updateNewMessageText.trim()
+       props.addMessageCallback(message)
     }
     return (
         <div className={s.dialogs}>

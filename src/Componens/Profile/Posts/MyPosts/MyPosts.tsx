@@ -2,7 +2,7 @@ import React from 'react';
 import s from './MyPosts.module.css';
 import {Posts} from './Post/Posts';
 import {MyPostsDataType,} from '../../../../Redux/Store';
-import {AddPostReduxForm} from './PostForm/PostForm';
+import {AddPostReduxForm, FormDataPostType} from './PostForm/PostForm';
 
 
 type MyPostPropsType = {
@@ -24,7 +24,7 @@ export const MyPosts = (props: MyPostPropsType) => {
     //         // addPostCallback()
     //     }
     // }
-    const onSubmit = (formData: any) => {
+    const onSubmit = (formData: FormDataPostType) => {
         props.addPostCallback(formData.newTextPost)
     }
 

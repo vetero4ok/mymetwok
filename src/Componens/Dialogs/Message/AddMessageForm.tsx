@@ -4,8 +4,12 @@ import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import {InputComp} from '../../Common/FormsControl/FormsControl';
 import {maxLengthCreator, required} from '../../../Utils/Validators/Validators';
 
+export type FormDataMessageType = {
+    updateNewMessageText:string
+}
+
 const maxLength30 = maxLengthCreator(30)
-const MessageForm: React.FC<InjectedFormProps> = (props) => {
+const MessageForm: React.FC<InjectedFormProps<FormDataMessageType>> = (props) => {
     return <>
         <form onSubmit={props.handleSubmit}>
             <Field
@@ -17,4 +21,4 @@ const MessageForm: React.FC<InjectedFormProps> = (props) => {
         </form>
     </>
 }
-export const AddMessageReduxForm = reduxForm({form: 'updateNewMessageText'})(MessageForm)
+export const AddMessageReduxForm = reduxForm<FormDataMessageType>({form: 'updateNewMessageText'})(MessageForm)
