@@ -1,8 +1,15 @@
 .formControl.error input,
-.formControl.error textarea{
-    border:solid red 2px;
+.formControl.error textarea {
+    border: solid red 2px;
 }
 
-.formControl.error span{
-    border:solid red 2px;
+.formControl.error span {
+    border: solid red 2px;
+}
+
+.formSummeryError {
+    border: solid red 2px;
+    padding: 5px;
+    color: #840303;
+
 }

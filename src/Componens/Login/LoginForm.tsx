@@ -3,13 +3,14 @@ import React from 'react';
 import {required} from '../../Utils/Validators/Validators';
 import {InputComp} from '../Common/FormsControl/FormsControl';
 import SuperButton from '../Common/Button/SuperButton';
+import s from '../Common/FormsControl/FormsControl.module.css'
 
 export type FormDataType = {
     email: string
     password: string
     rememberMe: boolean
 }
-export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+export const LoginForm: React.FC<InjectedFormProps<FormDataType, {}>> = (props) => {
 
     return <>
         <form onSubmit={props.handleSubmit}>
@@ -30,6 +31,12 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
             <div>
                 <Field type={'checkbox'} name={'rememberMe'} component={'input'}/> Remember me
             </div>
+            {
+                props.error &&
+                <div className={s.formSummeryError}>
+                    {props.error}
+                </div>
+            }
             <div>
                 <SuperButton>
                     Submit

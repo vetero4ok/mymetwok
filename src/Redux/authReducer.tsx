@@ -1,6 +1,7 @@
 import {AppDispatch, AppThunk} from './Redux-Store';
 import {authMeAPI} from '../Api/Api';
 import {toggleIsFetching} from './usersPageReducer';
+import {stopSubmit} from 'redux-form';
 
 let InitialState: InitAuthStateType = {
     /** заглушка надо придумать как загружать данные
@@ -70,18 +71,21 @@ export const loginTC = (email: string, password: string, rememberMe: boolean, ca
         authMeAPI.login(email, password, rememberMe, captcha)
             .then(res => {
                 if (res.data.resultCode === 0) {
-                    authMeAPI.authMe().then(response => {
-                        if (response.data.resultCode === 0) {
-                            let {id, email, login} = response.data.data
+                    authMeAPI.authMe().then(res => {
+                        if (res.data.resultCode === 0) {
+                            let {id, email, login} = res.data.data
                             dispatch(setUserAuthDataSuccess(id, email, login, true));
                             dispatch(toggleIsFetching(false));
                         }
                     })
-                   // dispatch(setUserAuthData())
+                    // dispatch(setUserAuthData())
                     /** немогу задиспатчить санку, странная ошибка*/
+                }else {
+                    let message = res.data.messages.length > 0 ? res.data.messages[0] : 'Some Error'
+                    console.log(message)
+                    dispatch(stopSubmit('login', {_error: message}))
                 }
-            })
-
+           })
     }
 export const logoutTC = (): AppThunk =>
     (dispatch: AppDispatch) => {
