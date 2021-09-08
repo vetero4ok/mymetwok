@@ -29,22 +29,15 @@ class ProfileApiComponents extends React.Component<PropsType> {
          * профайла в кінець адресної строки, а  в PathParamType  userId: string тому неявно переводимо строку в число*/
         if (!userId) {
             userId = this.props.userId
+            if(!userId){
+                this.props.history.push('/login')
+            }
         }
         this.props.setProfilePage(userId)
         this.props.getStatusProfileTC(userId)
 
 
     }
-
-    // componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any) {
-    //
-    //     let userId = +this.props.match.params.userId;
-    //     if (!userId) {
-    //         userId = this.props.userId
-    //     }
-    //     this.props.setProfilePage(userId)
-    // }
-
     render() {
         return (
             <>

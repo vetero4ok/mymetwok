@@ -2,7 +2,7 @@ import React from 'react';
 import {Header} from './Header';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../Redux/Redux-Store';
-import {logoutTC, setUserAuthData} from '../../Redux/authReducer';
+import {logoutTC} from '../../Redux/authReducer';
 import {UserProfileType} from '../../Redux/profilePageReducer';
 
 
@@ -12,16 +12,10 @@ type PropsHeaderComponentType = {
     login: string
     email: string
     profile: UserProfileType | null
-    setUserAuthData: () => void
     logoutTC: () => void
 }
 
 class HeaderApiContainer extends React.Component<PropsHeaderComponentType> {
-
-    componentDidMount() {
-        this.props.setUserAuthData()
-
-    }
 
     render() {
         return (
@@ -45,7 +39,6 @@ function mapStateToProps(state: AppStateType) {
 }
 
 export const HeaderContainer = connect(mapStateToProps, {
-    setUserAuthData,
     logoutTC
 
 })(HeaderApiContainer)

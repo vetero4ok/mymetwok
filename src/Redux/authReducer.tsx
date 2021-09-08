@@ -53,17 +53,16 @@ export const setUserAuthDataSuccess = (userId: number | null, email: string, log
 
 export type SetUserAuthDataActionType = ReturnType<typeof setUserAuthDataSuccess>
 
-export const setUserAuthData = (): AppThunk => {
-    return (dispatch: AppDispatch) => {
-        dispatch(toggleIsFetching(true));
-        authMeAPI.authMe().then(response => {
-            if (response.data.resultCode === 0) {
-                let {id, email, login} = response.data.data
-                dispatch(setUserAuthDataSuccess(id, email, login, true));
-                dispatch(toggleIsFetching(false));
-            }
-        })
-    }
+export const setUserAuthData = (): AppThunk => (dispatch) => {
+    dispatch(toggleIsFetching(true));
+    return authMeAPI.authMe().then(response => {
+        if (response.data.resultCode === 0) {
+            let {id, email, login} = response.data.data
+            dispatch(setUserAuthDataSuccess(id, email, login, true));
+            dispatch(toggleIsFetching(false));
+        }
+    })
+
 }
 
 export const loginTC = (email: string, password: string, rememberMe: boolean, captcha: boolean): AppThunk =>
@@ -80,12 +79,12 @@ export const loginTC = (email: string, password: string, rememberMe: boolean, ca
                     })
                     // dispatch(setUserAuthData())
                     /** немогу задиспатчить санку, странная ошибка*/
-                }else {
+                } else {
                     let message = res.data.messages.length > 0 ? res.data.messages[0] : 'Some Error'
                     console.log(message)
                     dispatch(stopSubmit('login', {_error: message}))
                 }
-           })
+            })
     }
 export const logoutTC = (): AppThunk =>
     (dispatch: AppDispatch) => {
