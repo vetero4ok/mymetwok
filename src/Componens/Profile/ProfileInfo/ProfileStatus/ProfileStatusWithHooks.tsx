@@ -1,4 +1,4 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, useEffect, useState} from 'react';
 
 type StatusComponentPropsType = {
     profileStatus: string
@@ -8,6 +8,9 @@ type StatusComponentPropsType = {
 export const ProfileStatusWithHooks = (props: StatusComponentPropsType) => {
     const [editMode, setEditMode] = useState<boolean>(false)
     const [status, setStatus] = useState<string>(props.profileStatus)
+    useEffect(()=> {
+        setStatus(props.profileStatus)
+    }, [props.profileStatus])
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setStatus(e.currentTarget.value)
     }
