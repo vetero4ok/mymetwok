@@ -147,10 +147,11 @@ export type setTotalUsersCountACType = ReturnType<typeof setTotalUserCount>
 export type ToggleIsFetchingACType = ReturnType<typeof toggleIsFetching>
 export type ToggleInProcessACType = ReturnType<typeof toggleInProcess>
 
-export const getUsers = (currentPages: number, pageSize: number) => {
+export const getUsers = (requestPages: number, pageSize: number) => {
     return (dispatch: AppDispatch) => {
         dispatch(toggleIsFetching(true));
-        userAPI.getUsers(currentPages, pageSize)
+        dispatch(setCurrantPage(requestPages))
+        userAPI.getUsers(requestPages, pageSize)
             .then(res => {
                 dispatch(toggleIsFetching(false));
                 dispatch(setUsers(res.data.items));

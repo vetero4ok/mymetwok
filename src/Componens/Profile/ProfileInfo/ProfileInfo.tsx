@@ -10,7 +10,7 @@ import instagram from '../../../assets/logos/instagram.png'
 import website from '../../../assets/logos/website.png'
 import facebook from '../../../assets/logos/Facebook.svg'
 import github from '../../../assets/logos/github.png'
-import {ProfileStatus} from './ProfileStatus/ProfileStatus';
+import {ProfileStatusWithHooks} from './ProfileStatus/ProfileStatusWithHooks';
 
 
 type profileInfoPropsType = {
@@ -33,10 +33,19 @@ export const ProfileInfo = (props: profileInfoPropsType) => {
                 <div className={s.statusWrap}>
                     <div><h2>{props.profile.fullName}</h2></div>
                     <div className={s.status}>
-                        <ProfileStatus
+                         {/*Class Component*/}
+
+                        {/*<ProfileStatus*/}
+                        {/*    profileStatus={props.profileStatus}*/}
+                        {/*    setStatusProfileTC = {props.setStatusProfileTC}*/}
+                        {/*/>*/}
+
+                        {/*on Hooks*/}
+                        <ProfileStatusWithHooks
                             profileStatus={props.profileStatus}
                             setStatusProfileTC = {props.setStatusProfileTC}
                         />
+
                     </div>
                 </div>
                 <div>
