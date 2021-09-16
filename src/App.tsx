@@ -16,6 +16,7 @@ import {AppStateType} from './Redux/Redux-Store';
 import {compose} from 'redux';
 import {Preloader} from './Componens/Common/Preloader/Preloader';
 import {initializedAppTC} from './Redux/app-reducer';
+import 'antd/dist/antd.css';
 
 type AppPropsType = {
     initializedApp: boolean
