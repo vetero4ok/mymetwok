@@ -13,7 +13,8 @@ type ProfilePropsType = {
 }
 
 
-export const Profile = (props: ProfilePropsType) => {
+export const Profile = React.memo( (props: ProfilePropsType) => {
+  //  console.log(111)
     return (
         <div className={s.content}>
                {/*Main content*/}
@@ -27,4 +28,4 @@ export const Profile = (props: ProfilePropsType) => {
         </div>
 
     );
-}
+})
